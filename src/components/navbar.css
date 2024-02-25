@@ -1,5 +1,4 @@
 header {
-    background-color: cadetblue;
     padding: 0px 20px;
     width: 80%;
     margin-left: 10%;
@@ -8,7 +7,6 @@ header {
 .samurise-brand {
     display: inline-block;
     vertical-align: middle;
-    font-family: sans-serif;
 }
 
 .navbar {
