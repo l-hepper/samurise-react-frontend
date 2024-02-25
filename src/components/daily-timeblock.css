@@ -1,0 +1,27 @@
+p {
+  margin: 0;
+  visibility: hidden;
+  font-size: 10px;
+}
+
+.daily-timeblock {
+  border-radius: 5px;
+  width: 40%;
+  display: inline-block;
+}
+
+.daily-timeblock-period-15 {
+  border-bottom: 1px dashed black;
+}
+
+.selected {
+    background-color: purple;
+}
+
+.white {
+    background-color: antiquewhite;
+}
+
+.gray {
+    background-color: lightgray;
+}

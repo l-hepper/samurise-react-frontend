@@ -1,31 +1,25 @@
-header {
-    padding: 0px 20px;
-    width: 80%;
-    margin-left: 10%;
-}
-
 .samurise-brand {
-    display: inline-block;
-    vertical-align: middle;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .navbar {
-    display: inline-flex;
-    justify-content: right;
-    width: 80%;
+  display: inline-flex;
+  justify-content: right;
+  width: 80%;
 }
 
 .navbar-item {
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 50px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 50px;
 }
 
 .navbar-item a {
-    text-decoration: none;
-    color:antiquewhite;
+  text-decoration: none;
+  color: antiquewhite;
 }
 
 .navbar-item a:hover {
-    color: white;
+  color: white;
 }
