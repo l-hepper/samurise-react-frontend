@@ -1,0 +1,33 @@
+header {
+    background-color: cadetblue;
+    padding: 0px 20px;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.samurise-brand {
+    display: inline-block;
+    vertical-align: middle;
+    font-family: sans-serif;
+}
+
+.navbar {
+    display: inline-flex;
+    justify-content: right;
+    width: 80%;
+}
+
+.navbar-item {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 50px;
+}
+
+.navbar-item a {
+    text-decoration: none;
+    color:antiquewhite;
+}
+
+.navbar-item a:hover {
+    color: white;
+}
