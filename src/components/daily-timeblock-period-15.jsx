@@ -22,7 +22,7 @@ export default function DailyTimeBlockPeriod15(props) {
       onClick={onClick}
       class={isSelected ? selectedStyling : nonSelectedStyling}
     >
-      <p>{props.timePeriod}</p>
+      <p class="timeblock-paragraph">{props.timePeriod}</p>
     </div>
   );
 }

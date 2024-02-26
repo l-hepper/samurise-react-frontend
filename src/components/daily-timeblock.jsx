@@ -12,31 +12,56 @@ export default function DailyTimeBlock() {
   const [endTime, updateEndTime] = useState();
   const [newTimeBlockMode, setTimeBlockMode] = useState(false);
 
-  // example timeblock object for debugging and testing
-  const timeBlockExample = {
-    startTime: startTime,
-    endTime: endTime,
-  };
+  const [timeBlocksArray, setTimeBlocksArray] = useState([]);
 
   const handleTimeBlockClick = (timeSelected) => {
     if (!newTimeBlockMode) {
-      timeBlockExample.startTime = updateStartTime(timeSelected);
+      // clear the current block time selection
+      updateStartTime(null);
+      updateEndTime(null);
+
+      updateStartTime(timeSelected);
       setTimeBlockMode(true);
     }
 
     if (newTimeBlockMode) {
-      timeBlockExample.endTime = updateEndTime(timeSelected);
+      // calculates the end time of the block based on the final selected end block
+      let correctedEndTime = Number(timeSelected.slice(-2)) + 15;
+      if (correctedEndTime == 60) {
+        correctedEndTime = ":00";
+        if (Number(timeSelected.slice(0, 2) > 9)) {
+          timeSelected = Number(timeSelected.slice(0, 2)) + 1;
+        } else {
+          timeSelected = Number(timeSelected.slice(0, 1)) + 1;
+        }
+        timeSelected += ":00";
+      } else {
+        timeSelected = timeSelected.slice(0, 2) + "" + correctedEndTime;
+      }
+
+      updateEndTime(timeSelected);
+
+      setTimeBlocksArray((timeBlocksArray) => [
+        ...timeBlocksArray,
+        { startTime, endTime: timeSelected },
+      ]);
+
       setTimeBlockMode(false);
     }
   };
 
   return (
     <div class="daily-timeblock">
-      <h6>
-        {timeBlockExample.startTime} - {timeBlockExample.endTime}
-      </h6>
+      {timeBlocksArray.map((item) => (
+        <p key={timeBlocksArray.indexOf(item)}>
+          {item.startTime} - {item.endTime}
+        </p>
+      ))}
+
+      {/* <p>{startTime} - {endTime}</p> */}
       {timeBlockRange.map((item) => (
         <OneHourTimeBlock
+          key={item}
           backColour="white"
           startHour={item}
           onClick={handleTimeBlockClick}

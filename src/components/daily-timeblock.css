@@ -1,6 +1,7 @@
-p {
+.timeblock-paragraph {
   margin: 0;
   font-size: 10px;
+  visibility: hidden;
 }
 
 .create-timeblock-button {
@@ -19,7 +20,7 @@ p {
 }
 
 .selected {
-    background-color: purple;
+    background-color: lightcoral;
 }
 
 .white {
