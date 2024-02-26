@@ -1,7 +1,11 @@
 p {
   margin: 0;
-  visibility: hidden;
   font-size: 10px;
+}
+
+.create-timeblock-button {
+  width: 100px;
+  height: 50px;
 }
 
 .daily-timeblock {
