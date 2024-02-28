@@ -8,7 +8,7 @@ import OneHourTimeBlock from "./one-hour-time-block";
 export default function DailyTimeBlock() {
   const [newTimeBlockMode, setTimeBlockMode] = useState(false);
 
-  const [timeBlockArray, setTimeBlockArray] = useState([]);
+  const [timeBlockArray, setTimeBlockArray] = useState(populateTimeBlocks(9, 8));
 
   const [dayLength, setDayLength] = useState(8);
 
