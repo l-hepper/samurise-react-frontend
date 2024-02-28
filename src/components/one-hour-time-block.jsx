@@ -7,10 +7,10 @@ export default function OneHourTimeBlock(props) {
 
   return (
     <div class={className}>
-      <DailyTimeBlockPeriod15 timePeriod={props.startHour + ":00"} onClick={props.onClick}/>
-      <DailyTimeBlockPeriod15 timePeriod={props.startHour + ":15"} onClick={props.onClick}/>
-      <DailyTimeBlockPeriod15 timePeriod={props.startHour + ":30"} onClick={props.onClick}/>
-      <DailyTimeBlockPeriod15 timePeriod={props.startHour + ":45"} onClick={props.onClick}/>
+      <DailyTimeBlockPeriod15 timePeriod={props.timeBlock.startTime + ":00"} onClick={props.onClick}/>
+      <DailyTimeBlockPeriod15 timePeriod={props.timeBlock.startTime + ":15"} onClick={props.onClick}/>
+      <DailyTimeBlockPeriod15 timePeriod={props.timeBlock.startTime + ":30"} onClick={props.onClick}/>
+      <DailyTimeBlockPeriod15 timePeriod={props.timeBlock.startTime + ":45"} onClick={props.onClick}/>
     </div>
   );
 }

@@ -1,7 +1,7 @@
-.timeblock-paragraph {
-  margin: 0;
-  font-size: 10px;
-  visibility: hidden;
+.daily-timeblock {
+  border-radius: 5px;
+  width: 40%;
+  display: inline-block;
 }
 
 .create-timeblock-button {
@@ -9,10 +9,17 @@
   height: 50px;
 }
 
-.daily-timeblock {
-  border-radius: 5px;
-  width: 40%;
-  display: inline-block;
+.daily-timeblock-array {
+  margin-top: 1rem;
+  border-top: 1px dashed black;
+}
+
+.timeblock-paragraph {
+  margin: 0;
+  font-size: 13px;
+  position: relative;
+  top: -9px;
+  left: -35px;
 }
 
 .daily-timeblock-period-15 {
@@ -21,12 +28,4 @@
 
 .selected {
     background-color: lightcoral;
-}
-
-.white {
-    background-color: antiquewhite;
-}
-
-.gray {
-    background-color: lightgray;
 }

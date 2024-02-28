@@ -6,67 +6,48 @@ import "./daily-timeblock.css";
 import OneHourTimeBlock from "./one-hour-time-block";
 
 export default function DailyTimeBlock() {
-  let timeBlockRange = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
-
-  const [startTime, updateStartTime] = useState();
-  const [endTime, updateEndTime] = useState();
   const [newTimeBlockMode, setTimeBlockMode] = useState(false);
 
-  const [timeBlocksArray, setTimeBlocksArray] = useState([]);
+  const [timeBlockArray, setTimeBlockArray] = useState([]);
 
-  const handleTimeBlockClick = (timeSelected) => {
-    if (!newTimeBlockMode) {
-      // clear the current block time selection
-      updateStartTime(null);
-      updateEndTime(null);
+  const [dayLength, setDayLength] = useState(8);
 
-      updateStartTime(timeSelected);
-      setTimeBlockMode(true);
+
+  // updates the timeblock planner with the provided day start variable and day length variable
+  function handleDayLengthButtonClick() {
+
+    // prompt the user for desired day start time and length
+    const dayStart = prompt("When do you want your day to start?");
+    const newDayLength = prompt("How many hours do you want to schedule?");
+
+    // set day length variable -- debugging?
+    setDayLength(newDayLength);
+
+    // populate the timeBlock array as required
+    const newArray = populateTimeBlocks(dayStart, newDayLength);
+    setTimeBlockArray(newArray);
+  }
+
+  // populates an array of empty timeblocks according to the size of the dayLength variable
+  function populateTimeBlocks(dayStart, newDayLength) {
+    let array = [];
+    for (let i = 0; i < newDayLength; i++) {
+      array.push({ name: "Unscheduled", startTime: Number(dayStart) + i });
     }
-
-    if (newTimeBlockMode) {
-      // calculates the end time of the block based on the final selected end block
-      let correctedEndTime = Number(timeSelected.slice(-2)) + 15;
-      if (correctedEndTime == 60) {
-        correctedEndTime = ":00";
-        if (Number(timeSelected.slice(0, 2) > 9)) {
-          timeSelected = Number(timeSelected.slice(0, 2)) + 1;
-        } else {
-          timeSelected = Number(timeSelected.slice(0, 1)) + 1;
-        }
-        timeSelected += ":00";
-      } else {
-        timeSelected = timeSelected.slice(0, 2) + "" + correctedEndTime;
-      }
-
-      updateEndTime(timeSelected);
-
-      setTimeBlocksArray((timeBlocksArray) => [
-        ...timeBlocksArray,
-        { startTime, endTime: timeSelected },
-      ]);
-
-      setTimeBlockMode(false);
-    }
-  };
+    return array;
+  }
 
   return (
     <div class="daily-timeblock">
-      {timeBlocksArray.map((item) => (
-        <p key={timeBlocksArray.indexOf(item)}>
-          {item.startTime} - {item.endTime}
-        </p>
-      ))}
+      {dayLength}
+      <button onClick={handleDayLengthButtonClick}>Set Day Length</button>
 
       {/* <p>{startTime} - {endTime}</p> */}
-      {timeBlockRange.map((item) => (
-        <OneHourTimeBlock
-          key={item}
-          backColour="white"
-          startHour={item}
-          onClick={handleTimeBlockClick}
-        />
-      ))}
+      <div class="daily-timeblock-array">
+        {timeBlockArray.map((timeBlock, index) => (
+          <OneHourTimeBlock key={index} timeBlock={timeBlock} />
+        ))}
+      </div>
     </div>
   );
 }
