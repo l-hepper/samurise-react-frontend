@@ -14,7 +14,6 @@ export default function DailyTimeBlockPeriod15(props) {
     } else {
       setSelected(true);
     }
-    props.onClick(props.timePeriod);
   }
 
   return (

@@ -10,20 +10,23 @@
 }
 
 .daily-timeblock-array {
-  margin-top: 1rem;
-  border-top: 1px dashed black;
+  margin-top: 3rem;
+  background-color: aliceblue;
+  border-radius: 5px;
+  padding: 1rem 1rem 0rem 3rem;
 }
 
 .timeblock-paragraph {
+  display: inline;
   margin: 0;
-  font-size: 13px;
+  font-size: 12px;
   position: relative;
-  top: -9px;
-  left: -35px;
+  top: -11px;
+  left: -40px;
 }
 
 .daily-timeblock-period-15 {
-  border-bottom: 1px dashed black;
+  border-top: 1px dashed black;
 }
 
 .selected {
