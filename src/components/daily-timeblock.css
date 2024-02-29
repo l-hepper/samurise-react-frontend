@@ -10,7 +10,7 @@
 }
 
 .daily-timeblock-array {
-  margin-top: 3rem;
+  margin-top: 1rem;
   background-color: aliceblue;
   border-radius: 5px;
   padding: 1rem 1rem 0rem 3rem;
@@ -21,7 +21,7 @@
   margin: 0;
   font-size: 12px;
   position: relative;
-  top: -11px;
+  top: -12px;
   left: -42px;
 }
 
@@ -38,6 +38,7 @@
 
 .bold {
   font-weight: bold;
+  border-top: 1px solid black;
 }
 
 .selected {
