@@ -25,11 +25,22 @@
   left: -42px;
 }
 
+.timeblock-information {
+  display: inline;
+}
+
 .timeblock-paragraph-name {
   display: inline;
   margin: 0;
   font-size: 12px;
   font-weight: bold;
+}
+
+.timeblock-button {
+  z-index: 1;
+  opacity: 50%;
+  border: none;
+  margin-right: 5px;
 }
 
 .daily-timeblock-period-15 {

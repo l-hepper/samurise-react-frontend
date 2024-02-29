@@ -10,6 +10,7 @@ let startTimeBlock = null;
 let startTimeBlockIndex = null;
 let endTimeBlock = null;
 let endTimeBlockIndex = null;
+let eventLength = null;
 
 export default function DailyTimeBlock() {
   const [newTimeBlockMode, setNewTimeBlockMode] = useState(false);
@@ -18,6 +19,7 @@ export default function DailyTimeBlock() {
   const [timeBlockArray, setTimeBlockArray] = useState(
     populateTimeBlocks(9, 8)
   );
+  const [eventArray, setEventArray] = useState([]);
 
   // populates an array of empty timeblocks according to the size of the dayLength variable
   function populateTimeBlocks(dayStart, newDayLength) {
@@ -72,11 +74,12 @@ export default function DailyTimeBlock() {
     startTimeBlockIndex = null;
     endTimeBlock = null;
     endTimeBlockIndex = null;
+    eventLength = null;
   }
 
   function selectStartTime(timeBlock, index) {
-    timeBlockArray[index].scheduled = true;
     timeBlockArray[index].name = "Select end time...";
+    timeBlockArray[index].scheduled = true;
     setNewTimeBlockMode((state) => (state = true));
     startTimeBlock = timeBlock;
     startTimeBlockIndex = index;
@@ -86,7 +89,7 @@ export default function DailyTimeBlock() {
   function selectEndTime(timeBlock, index) {
     endTimeBlock = timeBlock;
     endTimeBlockIndex = index;
-    setUserInformation("end function triggered" + index);
+    alert("end function triggered" + index);
     setNewTimeBlockMode((state) => (state = false));
 
     for (let i = startTimeBlockIndex; i <= endTimeBlockIndex; i++) {
@@ -96,14 +99,30 @@ export default function DailyTimeBlock() {
     let timeBlockName = prompt("Select a name for the new block: ");
     if (timeBlockName === null) {
       cancelSelection();
+      return;
     }
-    timeBlockArray[startTimeBlockIndex].name =
-      timeBlockName +
-      " : " +
-      startTimeBlock.startTime +
-      " - " +
-      endTimeBlock.endTime;
+    timeBlockName +=
+      " : " + startTimeBlock.startTime + " - " + endTimeBlock.endTime;
+    timeBlockArray[startTimeBlockIndex].name = timeBlockName;
+    eventArray.push({
+      name: timeBlockName,
+      startTime: startTimeBlock.startTime,
+      endTime: endTimeBlock.endTime,
+      startIndex: startTimeBlockIndex,
+      endIndex: index,
+    });
+    alert(eventArray[eventArray.length - 1].endIndex);
+    clearBlockSelections();
+  }
 
+  function deleteTimeBlock(index) {
+    let targetedEvent = eventArray.find(item => item.startIndex === index);
+    setUserInformation("delete function triggered" + index + targetedEvent.name);
+    for (let i = targetedEvent.startIndex; i <= targetedEvent.endIndex; i++) {
+      timeBlockArray[i].scheduled = false;
+      timeBlockArray[i].name = null;
+    }
+    eventArray.splice(index, 1);
     clearBlockSelections();
   }
 
@@ -146,6 +165,7 @@ export default function DailyTimeBlock() {
               newTimeBlockMode={newTimeBlockMode}
               selectStartTime={selectStartTime}
               selectEndTime={selectEndTime}
+              deleteTimeBlock={deleteTimeBlock}
             />
           ))}
         </div>
