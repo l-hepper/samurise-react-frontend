@@ -24,7 +24,8 @@ export default function DailyTimeBlock() {
     let array = [];
     let timeBlockEndings = [":00", ":15", ":30", ":45"];
     for (let i = 0; i < newDayLength; i++) {
-      for (let j = 0; j < 4; j++) { // each hour is composed of four 15 minute blocks
+      for (let j = 0; j < 4; j++) {
+        // each hour is composed of four 15 minute blocks
         array.push({
           name: null,
           startTime: Number(dayStart) + i + timeBlockEndings[j],
@@ -53,8 +54,24 @@ export default function DailyTimeBlock() {
   }
 
   function cancelSelection() {
-    timeBlockArray[startTimeBlockIndex].scheduled = false;
+    for (
+      let i = startTimeBlockIndex;
+      i <=
+      (endTimeBlockIndex === null ? startTimeBlockIndex : endTimeBlockIndex);
+      i++
+    ) {
+      timeBlockArray[i].scheduled = false;
+      timeBlockArray[i].name = null;
+    }
+    clearBlockSelections();
     setNewTimeBlockMode((state) => (state = false));
+  }
+
+  function clearBlockSelections() {
+    startTimeBlock = null;
+    startTimeBlockIndex = null;
+    endTimeBlock = null;
+    endTimeBlockIndex = null;
   }
 
   function selectStartTime(timeBlock, index) {
@@ -77,12 +94,17 @@ export default function DailyTimeBlock() {
     }
 
     let timeBlockName = prompt("Select a name for the new block: ");
+    if (timeBlockName === null) {
+      cancelSelection();
+    }
     timeBlockArray[startTimeBlockIndex].name =
       timeBlockName +
       " : " +
       startTimeBlock.startTime +
       " - " +
       endTimeBlock.endTime;
+
+    clearBlockSelections();
   }
 
   // will transform a time value by adding 15 minutes to it - required for calculating an accurate 'endtime' to timeblocks
