@@ -3,9 +3,9 @@ import { useState } from "react";
 
 import "./daily-timeblock.css";
 
-import OneHourTimeBlock from "./one-hour-time-block";
 import DailyTimeBlockPeriod15 from "./daily-timeblock-period-15";
 
+// global values set outside of function to ensure they persist beyond state refresh
 let startTimeBlock = null;
 let startTimeBlockIndex = null;
 let endTimeBlock = null;
@@ -24,10 +24,13 @@ export default function DailyTimeBlock() {
     let array = [];
     let timeBlockEndings = [":00", ":15", ":30", ":45"];
     for (let i = 0; i < newDayLength; i++) {
-      for (let j = 0; j < 4; j++) {
+      for (let j = 0; j < 4; j++) { // each hour is composed of four 15 minute blocks
         array.push({
           name: null,
           startTime: Number(dayStart) + i + timeBlockEndings[j],
+          endTime: incrementTimeValueBy15(
+            Number(dayStart) + i + timeBlockEndings[j]
+          ),
           scheduled: false,
         });
       }
@@ -56,6 +59,7 @@ export default function DailyTimeBlock() {
 
   function selectStartTime(timeBlock, index) {
     timeBlockArray[index].scheduled = true;
+    timeBlockArray[index].name = "Select end time...";
     setNewTimeBlockMode((state) => (state = true));
     startTimeBlock = timeBlock;
     startTimeBlockIndex = index;
@@ -73,14 +77,36 @@ export default function DailyTimeBlock() {
     }
 
     let timeBlockName = prompt("Select a name for the new block: ");
-    timeBlockArray[startTimeBlockIndex].name = timeBlockName;
+    timeBlockArray[startTimeBlockIndex].name =
+      timeBlockName +
+      " : " +
+      startTimeBlock.startTime +
+      " - " +
+      endTimeBlock.endTime;
+  }
+
+  // will transform a time value by adding 15 minutes to it - required for calculating an accurate 'endtime' to timeblocks
+  function incrementTimeValueBy15(time) {
+    if (time.length == 4) {
+      if (time.substring(2) == "45") {
+        time = Number(time[0]) + 1 + ":00";
+      } else {
+        time = time[0] + ":" + (Number(time.substring(2)) + 15);
+      }
+    } else {
+      if (time.substring(3) == "45") {
+        time = Number(time.substring(0, 2)) + 1 + ":00";
+      } else {
+        time =
+          Number(time.substring(0, 2)) + ":" + (Number(time.substring(3)) + 15);
+      }
+    }
+    return time;
   }
 
   return (
     <div class="daily-timeblock">
       <div class="daily-timeblock-controls">
-        <p>{newTimeBlockMode + ""}</p>
-        {dayLength}
         <button onClick={handleDayLengthButtonClick}>Set Day Length</button>
         <button onClick={cancelSelection}>Cancel Selection</button>
       </div>
@@ -104,17 +130,9 @@ export default function DailyTimeBlock() {
         {/* slightly hacky work around to achieve a pleasing ending time to the timeblock  */}
         <div class="daily-timeblock-period-15 bold">
           <p class="timeblock-paragraph-time">
-            {/* TODO - encapsulate within function - */}
-            {Number(
-              timeBlockArray[timeBlockArray.length - 1].startTime.substring(
-                0,
-                timeBlockArray[timeBlockArray.length - 1].startTime.length == 5
-                  ? 2
-                  : 1
-              )
-            ) +
-              1 +
-              ":00"}
+            {incrementTimeValueBy15(
+              timeBlockArray[timeBlockArray.length - 1].startTime
+            )}
           </p>
         </div>
       </div>
