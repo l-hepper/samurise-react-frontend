@@ -4,7 +4,10 @@ import { useState } from "react";
 export default function DailyTimeBlockPeriod15(props) {
 
   let nonSelectedStyling = "daily-timeblock-period-15";
-  let selectedStyling = "daily-timeblock-period-15 selected";
+  if (props.index % 4 === 0) {
+    nonSelectedStyling += " bold ";
+  }
+  let selectedStyling = nonSelectedStyling + " selected";
 
   const [isSelected, setSelected] = useState(false);
 
