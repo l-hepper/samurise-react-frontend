@@ -16,13 +16,20 @@
   padding: 1rem 1rem 0rem 3rem;
 }
 
-.timeblock-paragraph {
+.timeblock-paragraph-time {
   display: inline;
   margin: 0;
   font-size: 12px;
   position: relative;
   top: -11px;
   left: -42px;
+}
+
+.timeblock-paragraph-name {
+  display: inline;
+  margin: 0;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 .daily-timeblock-period-15 {

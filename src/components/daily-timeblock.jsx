@@ -6,9 +6,14 @@ import "./daily-timeblock.css";
 import OneHourTimeBlock from "./one-hour-time-block";
 import DailyTimeBlockPeriod15 from "./daily-timeblock-period-15";
 
-export default function DailyTimeBlock() {
-  const [newTimeBlockMode, setTimeBlockMode] = useState(false);
+let startTimeBlock = null;
+let startTimeBlockIndex = null;
+let endTimeBlock = null;
+let endTimeBlockIndex = null;
 
+export default function DailyTimeBlock() {
+  const [newTimeBlockMode, setNewTimeBlockMode] = useState(false);
+  const [userInformation, setUserInformation] = useState();
   const [dayLength, setDayLength] = useState(8); // debugging only
   const [timeBlockArray, setTimeBlockArray] = useState(
     populateTimeBlocks(9, 8)
@@ -21,8 +26,9 @@ export default function DailyTimeBlock() {
     for (let i = 0; i < newDayLength; i++) {
       for (let j = 0; j < 4; j++) {
         array.push({
-          name: "Unscheduled",
+          name: null,
           startTime: Number(dayStart) + i + timeBlockEndings[j],
+          scheduled: false,
         });
       }
     }
@@ -43,17 +49,42 @@ export default function DailyTimeBlock() {
     setTimeBlockArray(newArray);
   }
 
-  function handleCreateNewTimeBlockClick(startTime, index) {
+  function cancelSelection() {
+    timeBlockArray[startTimeBlockIndex].scheduled = false;
+    setNewTimeBlockMode((state) => (state = false));
+  }
 
+  function selectStartTime(timeBlock, index) {
+    timeBlockArray[index].scheduled = true;
+    setNewTimeBlockMode((state) => (state = true));
+    startTimeBlock = timeBlock;
+    startTimeBlockIndex = index;
+    setUserInformation("starttime function triggered" + index);
+  }
+
+  function selectEndTime(timeBlock, index) {
+    endTimeBlock = timeBlock;
+    endTimeBlockIndex = index;
+    setUserInformation("end function triggered" + index);
+    setNewTimeBlockMode((state) => (state = false));
+
+    for (let i = startTimeBlockIndex; i <= endTimeBlockIndex; i++) {
+      timeBlockArray[i].scheduled = true;
+    }
+
+    let timeBlockName = prompt("Select a name for the new block: ");
+    timeBlockArray[startTimeBlockIndex].name = timeBlockName;
   }
 
   return (
     <div class="daily-timeblock">
       <div class="daily-timeblock-controls">
+        <p>{newTimeBlockMode + ""}</p>
         {dayLength}
         <button onClick={handleDayLengthButtonClick}>Set Day Length</button>
-        <button onClick={handleCreateNewTimeBlockClick}>Create New</button>
+        <button onClick={cancelSelection}>Cancel Selection</button>
       </div>
+      {userInformation}
       {/* <p>{startTime} - {endTime}</p> */}
       <div class="daily-timeblock-array">
         {/* {timeBlockArray.map((timeBlock, index) => (
@@ -62,19 +93,24 @@ export default function DailyTimeBlock() {
         <div class="daily-timeblock-period-hour">
           {timeBlockArray.map((timeBlock, index) => (
             <DailyTimeBlockPeriod15
-              timePeriod={timeBlock.startTime}
+              timeBlock={timeBlock}
               index={index}
+              newTimeBlockMode={newTimeBlockMode}
+              selectStartTime={selectStartTime}
+              selectEndTime={selectEndTime}
             />
           ))}
         </div>
         {/* slightly hacky work around to achieve a pleasing ending time to the timeblock  */}
         <div class="daily-timeblock-period-15 bold">
-          <p class="timeblock-paragraph">
+          <p class="timeblock-paragraph-time">
             {/* TODO - encapsulate within function - */}
             {Number(
               timeBlockArray[timeBlockArray.length - 1].startTime.substring(
                 0,
-                timeBlockArray[timeBlockArray.length - 1].startTime.length == 5 ? 2 : 1
+                timeBlockArray[timeBlockArray.length - 1].startTime.length == 5
+                  ? 2
+                  : 1
               )
             ) +
               1 +
