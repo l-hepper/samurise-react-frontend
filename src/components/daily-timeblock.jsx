@@ -113,13 +113,21 @@ export default function DailyTimeBlock() {
   }
 
   function deleteTimeBlock(index) {
+    // get the targeted event
     let targetedEvent = eventArray.find((item) => item.startIndex === index);
 
+    let modifiedArray = [...timeBlockArray];
+    modifiedArray[targetedEvent.startIndex] = {
+      ...modifiedArray[targetedEvent.startIndex],
+      name: null,
+    };
+
     for (let i = targetedEvent.startIndex; i <= targetedEvent.endIndex; i++) {
-      timeBlockArray[i].scheduled = false;
-      timeBlockArray[i].name = null;
+      modifiedArray[i].scheduled = false;
     }
+    
     eventArray.splice(index, 1);
+    setTimeBlockArray(modifiedArray);
     clearBlockSelections();
   }
 
@@ -169,7 +177,7 @@ export default function DailyTimeBlock() {
         {/* slightly hacky work around to achieve a pleasing ending time to the timeblock  */}
         <div class="daily-timeblock-period-15 bold">
           <p class="timeblock-paragraph-time">
-            {timeBlockArray[timeBlockArray.length - 1].startTime}
+            {timeBlockArray[timeBlockArray.length - 1].endTime}
           </p>
         </div>
       </div>
