@@ -35,7 +35,6 @@ export default function DailyTimeBlockPeriod15(props) {
       <p class="timeblock-paragraph-time">{props.timeBlock.startTime}</p>
       <div class="timeblock-information">
         <p class="timeblock-paragraph-name">
-          {props.timeBlock.name === null || props.timeBlock.name === "Select end time..." ? null : <button class="timeblock-button edit">E</button>}
           {props.timeBlock.name === null || props.timeBlock.name === "Select end time..." ? null : <button onClick={handleDeleteButtonClick} class="timeblock-button delete">D</button>}
           <p class="timeblock-paragraph-name">{props.timeBlock.name === null ? null : props.timeBlock.name}</p>
         </p>
