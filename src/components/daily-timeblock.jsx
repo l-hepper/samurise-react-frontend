@@ -83,20 +83,18 @@ export default function DailyTimeBlock() {
     setNewTimeBlockMode((state) => (state = true));
     startTimeBlock = timeBlock;
     startTimeBlockIndex = index;
-    setUserInformation("starttime function triggered" + index);
   }
 
   function selectEndTime(timeBlock, index) {
     endTimeBlock = timeBlock;
     endTimeBlockIndex = index;
-    alert("end function triggered" + index);
     setNewTimeBlockMode((state) => (state = false));
 
     for (let i = startTimeBlockIndex; i <= endTimeBlockIndex; i++) {
       timeBlockArray[i].scheduled = true;
     }
 
-    let timeBlockName = prompt("Select a name for the new block: ");
+    let timeBlockName = prompt("Select a name for the new block: "); // replace with adding event name directly on the timeblock
     if (timeBlockName === null) {
       cancelSelection();
       return;
@@ -111,13 +109,12 @@ export default function DailyTimeBlock() {
       startIndex: startTimeBlockIndex,
       endIndex: index,
     });
-    alert(eventArray[eventArray.length - 1].endIndex);
     clearBlockSelections();
   }
 
   function deleteTimeBlock(index) {
-    let targetedEvent = eventArray.find(item => item.startIndex === index);
-    setUserInformation("delete function triggered" + index + targetedEvent.name);
+    let targetedEvent = eventArray.find((item) => item.startIndex === index);
+
     for (let i = targetedEvent.startIndex; i <= targetedEvent.endIndex; i++) {
       timeBlockArray[i].scheduled = false;
       timeBlockArray[i].name = null;
@@ -172,9 +169,7 @@ export default function DailyTimeBlock() {
         {/* slightly hacky work around to achieve a pleasing ending time to the timeblock  */}
         <div class="daily-timeblock-period-15 bold">
           <p class="timeblock-paragraph-time">
-            {incrementTimeValueBy15(
-              timeBlockArray[timeBlockArray.length - 1].startTime
-            )}
+            {timeBlockArray[timeBlockArray.length - 1].startTime}
           </p>
         </div>
       </div>
