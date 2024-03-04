@@ -1,0 +1,52 @@
+.pomodoro-timer * {
+  margin: 0;
+}
+
+.pomodoro-timer {
+  padding: 2%;
+  margin-top: 2.5%;
+  border-radius: 5px;
+  background-color: crimson;
+  height: 15%;
+}
+
+.pomodoro-section-label {
+    display: inline-block;
+  margin: 0 10% 1% 0;
+  font-weight: bold;
+}
+
+.total-time-tracker {
+    display: inline-block;
+}
+
+.timer-select {
+  font-size: 1.5rem;
+  padding: 20%;
+  border: 1px solid antiquewhite;
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+.timer-select:hover {
+  border: 1px solid white;
+}
+
+.timer {
+  display: flex;
+  height: 55%;
+}
+
+.countdown {
+  margin-right: 5rem;
+  vertical-align: center;
+}
+
+.begin-button {
+  font-size: 1.5rem;
+  margin-left: 7rem;
+  position: fixed;
+  height: 5%;
+  vertical-align: center;
+
+}

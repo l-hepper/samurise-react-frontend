@@ -13,7 +13,7 @@
   margin-top: 1rem;
   background-color: aliceblue;
   border-radius: 5px;
-  padding: 1rem 1rem 0rem 3rem;
+  padding: 1rem 0rem 0rem 3rem;
 }
 
 .timeblock-paragraph-time {
@@ -46,6 +46,7 @@
 
 .daily-timeblock-period-15 {
   border-top: 1px dashed black;
+  margin-right: 5%;
 }
 
 .bold {

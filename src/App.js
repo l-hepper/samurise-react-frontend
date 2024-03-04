@@ -5,9 +5,7 @@ import DailyTimeBlock from "./components/daily-timeblock";
 import DateSelect from "./components/date-select";
 import Pomodoro from "./components/pomodoro";
 
-function handleTimeChange() {
-  alert("Time change selected");
-}
+
 
 class App extends Component {
   render() {
@@ -20,9 +18,9 @@ class App extends Component {
             <DailyTimeBlock />
           </div>
           <div class="right-page">
-            <div class="habit-tracker">
+            {/* <div class="habit-tracker">
               <p>Habit Tracker</p>
-            </div>
+            </div> */}
             <Pomodoro />
             <div class="todo">
               <p>Todo List</p>
