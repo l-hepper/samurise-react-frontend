@@ -13,14 +13,16 @@ export default function Pomodoro() {
   }
 
   function beginCountDown() {
-    const totalSeconds = timeSelected * 60;
-    setSecondsLeft(0);
-    setMinutesLeft(timeSelected);
+    setSecondsLeft(59);
+    setMinutesLeft(timeSelected - 1);
     setCountingDown(true);
   }
 
   function pomodoroComplete() {
-    alert("Complete");
+    let audio = new Audio(
+      "/short-success-sound-glockenspiel-treasure-video-game-6346.mp3"
+    );
+    audio.play();
   }
 
   // countdown effect
@@ -40,9 +42,9 @@ export default function Pomodoro() {
     if (secondsLeft === 0 && minutesLeft === 0) {
       setCountingDown(false);
       pomodoroComplete();
-    } else if (secondsLeft === -1) {
-        setSecondsLeft(previousSeconds => previousSeconds = 59);
-        setMinutesLeft(previousMinutes => previousMinutes - 1);
+    } else if (secondsLeft === 0) {
+      setSecondsLeft((previousSeconds) => (previousSeconds = 59));
+      setMinutesLeft((previousMinutes) => previousMinutes - 1);
     }
   }, [secondsLeft]);
 
@@ -50,24 +52,35 @@ export default function Pomodoro() {
     <select
       class="timer-select"
       onChange={handleTimeChange}
-      value={countingDown ? secondsLeft : timeSelected}
+      value={timeSelected}
     >
-      <option value="10">10</option>
-      <option value="15">15</option>
-      <option value="25">25</option>
-      <option value="30">30</option>
-      <option value="45">45</option>
+      <option value="10">10:00</option>
+      <option value="15">15:00</option>
+      <option value="25">25:00</option>
+      <option value="30">30:00</option>
+      <option value="45">45:00</option>
     </select>
   );
 
+  const timerCountDown = (
+    <option class="timer-select counting">
+      {(minutesLeft > 9 ? minutesLeft : "0" + minutesLeft) +
+        ":" +
+        (secondsLeft > 9 ? secondsLeft : "0" + secondsLeft)}
+    </option>
+
+  );
   return (
     <div class="pomodoro-timer">
       <div>
         <p class="pomodoro-section-label">Timer</p>
-        <p class="total-time-tracker">Total time today: </p>
       </div>
       <div class="timer">
-        <div class="countdown">{countingDown ? minutesLeft + ":" + secondsLeft : timerSelect}</div>
+        <div class="countdown">
+          {countingDown
+            ? timerCountDown
+            : timerSelect}
+        </div>
         <button class="begin-button" onClick={beginCountDown}>
           Begin
         </button>
