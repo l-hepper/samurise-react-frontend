@@ -11,3 +11,35 @@ body {
   margin-left: 10%;
 }
 
+.samurise-dashboard {
+  display: flex;
+}
+
+.left-page {
+  display: contents;
+}
+
+.right-page {
+  padding-top: 1.5%;
+  width: 40%;
+  margin-left: 2.5%;
+}
+
+.habit-tracker {
+  font-weight: bold;
+  margin-top: 2.5%;
+  background-color: green;
+  padding: 1%;
+  border-radius: 5px;
+  height: 10%;
+}
+
+.todo {
+  font-weight: bold;
+  padding: 1%;
+  margin-top: 2.5%;
+  background-color: burlywood;
+  border-radius: 5px;
+  height: 30%;
+}
+

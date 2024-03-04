@@ -1,8 +1,12 @@
-.date-select-button {
-    display: inline-block;
+.date-select {
+  margin-left: 5%;
 }
 
 .date-select h3 {
-    display: inline-block;
-    margin: 0 10px 10px 10px;
+  display: inline-block;
+  margin: 0 10px 10px 10px;
+}
+
+.date-select-button {
+  display: inline-block;
 }
