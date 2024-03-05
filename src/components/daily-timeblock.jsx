@@ -116,6 +116,11 @@ export default function DailyTimeBlock() {
     // get the targeted event
     let targetedEvent = eventArray.find((item) => item.startIndex === index);
 
+    // if no event is found then it means the user has not created a complete timeblock and the initial selection only need to be cancelled
+    if (!targetedEvent) {
+      cancelSelection();
+    }
+
     let modifiedArray = [...timeBlockArray];
     modifiedArray[targetedEvent.startIndex] = {
       ...modifiedArray[targetedEvent.startIndex],
