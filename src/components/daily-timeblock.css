@@ -56,6 +56,15 @@
   margin-right: 5%;
 }
 
+.edit-name-input {
+  font-size: 100%;
+  font-weight: bold;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  background-color: antiquewhite;
+}
+
 .bold {
   font-weight: bold;
   border-top: 1px solid black;

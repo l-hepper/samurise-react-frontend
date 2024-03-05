@@ -101,7 +101,7 @@ export default function DailyTimeBlock() {
   }
   
   function setTimeBlockName(name) {
-    timeBlockArray[startTimeBlockIndex].name = name;
+    timeBlockArray[startTimeBlockIndex].name = name + " : " + startTimeBlock.startTime + " - " + endTimeBlock.endTime;
   }
 
   function storeEventInEventArray(eventName) {
