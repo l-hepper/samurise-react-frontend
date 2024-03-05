@@ -23,7 +23,6 @@
   position: relative;
   top: -12px;
   left: -42px;
-
 }
 
 .timeblock-information {
@@ -38,10 +37,18 @@
 }
 
 .timeblock-button {
-  z-index: 1;
-  opacity: 50%;
+  background: transparent;
+  font-size: 99%;
   border: none;
   margin-right: 5px;
+}
+
+.timeblock-button svg {
+  fill-opacity: 70%;
+}
+
+.timeblock-button svg:hover {
+   fill-opacity: 100%;
 }
 
 .daily-timeblock-period-15 {
@@ -55,5 +62,5 @@
 }
 
 .selected {
-    background-color: lightcoral;
+  background-color: lightcoral;
 }
