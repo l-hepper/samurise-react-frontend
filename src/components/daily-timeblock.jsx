@@ -77,7 +77,7 @@ export default function DailyTimeBlock() {
     eventLength = null;
   }
 
-  function selectStartTime(timeBlock, index) {
+  function selectStartTime(timeBlock, index, storeNameFunction) {
     timeBlockArray[index].name = "Select end time...";
     timeBlockArray[index].scheduled = true;
     setNewTimeBlockMode((state) => (state = true));
@@ -94,13 +94,12 @@ export default function DailyTimeBlock() {
       timeBlockArray[i].scheduled = true;
     }
 
-    let timeBlockName = prompt("Select a name for the new block: "); // replace with adding event name directly on the timeblock
+    // storedNameFunction();
+    let timeBlockName = prompt("Name for time block: ");
     if (timeBlockName === null) {
       cancelSelection();
       return;
     }
-    timeBlockName +=
-      " : " + startTimeBlock.startTime + " - " + endTimeBlock.endTime;
     timeBlockArray[startTimeBlockIndex].name = timeBlockName;
     eventArray.push({
       name: timeBlockName,
@@ -118,6 +117,7 @@ export default function DailyTimeBlock() {
 
     // if no event is found then it means the user has not created a complete timeblock and the initial selection only need to be cancelled
     if (!targetedEvent) {
+      alert("No event found");
       cancelSelection();
     }
 
@@ -158,10 +158,10 @@ export default function DailyTimeBlock() {
   return (
     <div class="daily-timeblock">
       <div class="daily-timeblock-controls">
+      {userInformation}
         <button onClick={handleDayLengthButtonClick}>Set Day Length</button>
       </div>
-      {userInformation}
-      {/* <p>{startTime} - {endTime}</p> */}
+      
       <div class="daily-timeblock-array">
         {/* {timeBlockArray.map((timeBlock, index) => (
           <OneHourTimeBlock key={index} timeBlock={timeBlock} />
