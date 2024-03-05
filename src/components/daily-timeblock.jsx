@@ -11,6 +11,7 @@ let startTimeBlockIndex = null;
 let endTimeBlock = null;
 let endTimeBlockIndex = null;
 let eventLength = null;
+let storedNameFunction = null;
 
 export default function DailyTimeBlock() {
   const [newTimeBlockMode, setNewTimeBlockMode] = useState(false);
@@ -75,14 +76,16 @@ export default function DailyTimeBlock() {
     endTimeBlock = null;
     endTimeBlockIndex = null;
     eventLength = null;
+    storedNameFunction = null;
   }
 
-  function selectStartTime(timeBlock, index, storeNameFunction) {
+  function selectStartTime(timeBlock, index, nameFunction) {
     timeBlockArray[index].name = "Select end time...";
     timeBlockArray[index].scheduled = true;
     setNewTimeBlockMode((state) => (state = true));
     startTimeBlock = timeBlock;
     startTimeBlockIndex = index;
+    storedNameFunction = nameFunction;
   }
 
   function selectEndTime(timeBlock, index) {
@@ -94,19 +97,20 @@ export default function DailyTimeBlock() {
       timeBlockArray[i].scheduled = true;
     }
 
-    // storedNameFunction();
-    let timeBlockName = prompt("Name for time block: ");
-    if (timeBlockName === null) {
-      cancelSelection();
-      return;
-    }
-    timeBlockArray[startTimeBlockIndex].name = timeBlockName;
+    storedNameFunction(); // calls editName in daily-timeblock-period-15 which then calls the two functions below
+  }
+  
+  function setTimeBlockName(name) {
+    timeBlockArray[startTimeBlockIndex].name = name;
+  }
+
+  function storeEventInEventArray(eventName) {
     eventArray.push({
-      name: timeBlockName,
+      name: eventName,
       startTime: startTimeBlock.startTime,
       endTime: endTimeBlock.endTime,
       startIndex: startTimeBlockIndex,
-      endIndex: index,
+      endIndex: endTimeBlockIndex,
     });
     clearBlockSelections();
   }
@@ -175,6 +179,8 @@ export default function DailyTimeBlock() {
               selectStartTime={selectStartTime}
               selectEndTime={selectEndTime}
               deleteTimeBlock={deleteTimeBlock}
+              setTimeBlockName={setTimeBlockName}
+              storeEventInEventArray={storeEventInEventArray}
             />
           ))}
         </div>

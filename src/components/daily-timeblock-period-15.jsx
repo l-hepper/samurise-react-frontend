@@ -33,22 +33,16 @@ export default function DailyTimeBlockPeriod15(props) {
     }
   }
 
-  function handleDoubleClick() {
-    if (
-      !props.timeBlock.name ||
-      props.timeBlock.name === "Select end time..."
-    ) {
-      return;
-    }
-    setEditNameMode(true);
-  }
-
   function editName(event) {
     setEditNameMode(true);
     if (event.key === "Enter" || event.type === "blur") {
       const newName = event.target.value;
-      props.timeBlock.name = newName;
+      if (newName === "") {
+        newName = "-";
+      }
       setEditNameMode(false);
+      props.setTimeBlockName(newName);
+      props.storeEventInEventArray(newName);
     }
   }
 
@@ -61,7 +55,7 @@ export default function DailyTimeBlockPeriod15(props) {
     <input
       class="edit-name-input"
       type="text"
-      defaultValue={props.timeBlock.name}
+      defaultValue=""
       onKeyDown={editName}
       onBlur={editName}
       ref={inputRef}
@@ -71,7 +65,6 @@ export default function DailyTimeBlockPeriod15(props) {
   return (
     <div
       onClick={handleClick}
-      onDoubleClick={handleDoubleClick}
       class={props.timeBlock.scheduled ? selectedStyling : nonSelectedStyling}
     >
       <p class="timeblock-paragraph-time">{props.timeBlock.startTime}</p>
