@@ -159,7 +159,6 @@ export default function DailyTimeBlock() {
     <div class="daily-timeblock">
       <div class="daily-timeblock-controls">
         <button onClick={handleDayLengthButtonClick}>Set Day Length</button>
-        <button onClick={cancelSelection}>Cancel Selection</button>
       </div>
       {userInformation}
       {/* <p>{startTime} - {endTime}</p> */}
