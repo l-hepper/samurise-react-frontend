@@ -32,7 +32,7 @@ export default function Pomodoro() {
     if (countingDown) {
       intervalId = setInterval(() => {
         setSecondsLeft((prevSeconds) => prevSeconds - 1);
-      }, 1000);
+      }, 25);
     }
 
     return () => clearInterval(intervalId);

@@ -13,6 +13,7 @@ body {
 
 .samurise-dashboard {
   display: flex;
+  height: 738px; /*specific height is required to stop element resizing when timeblock planner is lengthened or shortened */
 }
 
 .left-page {
