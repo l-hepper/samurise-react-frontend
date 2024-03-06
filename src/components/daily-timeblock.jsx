@@ -5,7 +5,7 @@ import "./daily-timeblock.css";
 
 import DailyTimeBlockPeriod15 from "./daily-timeblock-period-15";
 
-// global values set outside of function to ensure they persist beyond state refresh
+// global values set outside of function to ensure they persist beyond state update
 let startTimeBlock = null;
 let startTimeBlockIndex = null;
 let endTimeBlock = null;
@@ -162,14 +162,10 @@ export default function DailyTimeBlock() {
   return (
     <div class="daily-timeblock">
       <div class="daily-timeblock-controls">
-      {userInformation}
         <button onClick={handleDayLengthButtonClick}>Set Day Length</button>
       </div>
       
       <div class="daily-timeblock-array">
-        {/* {timeBlockArray.map((timeBlock, index) => (
-          <OneHourTimeBlock key={index} timeBlock={timeBlock} />
-        ))} */}
         <div class="daily-timeblock-period-hour">
           {timeBlockArray.map((timeBlock, index) => (
             <DailyTimeBlockPeriod15
