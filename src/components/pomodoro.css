@@ -49,10 +49,10 @@
   background-color: transparent;
   border: 2px solid antiquewhite;
   border-radius: 5px;
-  font-size: 1.5rem;
-  margin-left: 7.5rem;
-  position: fixed;
-  height: 5.9%;
+  font-size: 1.7rem;
+  margin-left: 0.5rem;
+  /* position: fixed; */
+  height: 120%;
 }
 
 .begin-button:hover {
