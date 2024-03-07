@@ -5,9 +5,9 @@ import "./tasklist.css";
 
 // for debugging use
 const dummyTaskList = [
-  "Git Course - Complete Section 5",
-  "Complete Anki Review",
-  "3 LeetCode Problems",
+  { name: "Git Course - complete section 5", complete: false },
+  { name: "LeetCode 5 questions", complete: false },
+  { name: "Update resume with samurise", complete: false },
 ];
 
 export default function TaskList() {
@@ -40,12 +40,30 @@ export default function TaskList() {
   // add a new task to the list
   function addTask(event) {
     if (event.key === "Enter" || event.type === "blur") {
-      const newTask = event.target.value;
+      if (!event.target.value) {
+        setAddNewTaskMode((previousState) => (previousState=false));
+        return;
+      }
+
+      const newTaskName = event.target.value;
+      const newTask = { name: newTaskName, complete: false };
       const modifiedTaskList = [...taskList];
       modifiedTaskList.push(newTask);
       setTaskList(modifiedTaskList);
       setAddNewTaskMode((previousState) => (previousState = false));
     }
+  }
+
+  // mark a task as complete
+  function markTaskItemAsComplete(index) {
+    let modifiedTaskList = [...taskList];
+    let modifiedTaskItem = modifiedTaskList[index];
+    modifiedTaskItem = {
+      ...modifiedTaskItem,
+      complete: !modifiedTaskItem.complete,
+    };
+    modifiedTaskList[index] = modifiedTaskItem;
+    setTaskList(modifiedTaskList);
   }
 
   // input element to be conditionally display for when the user adds a new task
@@ -70,11 +88,17 @@ export default function TaskList() {
           Add
         </button>
       </div>
-      <div class="task">
+      <div class="task-content">
         <p>TimeBlock name goes here</p>
         <ul>
-          {taskList.map((item) => (
-            <li>{item}</li>
+          {taskList.map((item, index) => (
+            <li
+              key={item.name}
+              onClick={() => markTaskItemAsComplete(index)}
+              className={"tasklist-item" + (item.complete ? " complete" : "")}
+            >
+              {item.name}
+            </li>
           ))}
           {addNewTaskMode && <li>{input}</li>}
         </ul>

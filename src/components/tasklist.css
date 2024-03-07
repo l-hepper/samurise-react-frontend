@@ -1,11 +1,28 @@
 .tasklist-section {
-    font-weight: bold;
-    padding: 1%;
-    margin-top: 2.5%;
-    background-color: burlywood;
-    border-radius: 5px;
-  }
+  font-weight: bold;
+  padding: 1%;
+  margin-top: 2.5%;
+  background-color: burlywood;
+  border-radius: 5px;
+}
 
 .tasklist-section-label {
-    text-align: center;
+  text-align: center;
+}
+
+.tasklist-item {
+  cursor: pointer;
+  display: block;
+}
+
+.tasklist-item:hover {
+  text-decoration: line-through;
+  text-decoration-color: red;
+  text-decoration-thickness: 2px;
+}
+
+.complete {
+  text-decoration-color: red;
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
 }
