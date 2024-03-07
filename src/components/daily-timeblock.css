@@ -11,7 +11,7 @@
 
 .daily-timeblock-array {
   margin-top: 1rem;
-  background-color: aliceblue;
+  background-color: var(--background-color);
   border-radius: 5px;
   padding: 1rem 0rem 0rem 3rem;
 }
@@ -23,6 +23,7 @@
   position: relative;
   top: -12px;
   left: -42px;
+  color: #808995;
 }
 
 .timeblock-information {
@@ -30,10 +31,10 @@
 }
 
 .timeblock-paragraph-name {
+  color: var(--font-color);
   display: inline;
   margin: 0;
   font-size: 12px;
-  font-weight: bold;
 }
 
 .timeblock-button {
@@ -45,31 +46,49 @@
 
 .timeblock-button svg {
   fill-opacity: 70%;
+  fill: var(--font-color);
 }
 
 .timeblock-button svg:hover {
-   fill-opacity: 100%;
-}
-
-.daily-timeblock-period-15 {
-  border-top: 1px dashed black;
-  margin-right: 5%;
+  fill-opacity: 100%;
 }
 
 .edit-name-input {
   font-size: 100%;
-  font-weight: bold;
   outline: none;
   border: none;
-  border-radius: 3px;
-  background-color: antiquewhite;
+  border-radius: 2px;
+  background-color: var(--background-color);
+}
+
+.daily-timeblock-period-15 {
+  cursor: pointer;
+  border-top: 1px dashed #465160; 
+  margin-right: 5%;
+  transition: background-color 0.2s ease;
+}
+
+.daily-timeblock-period-15:hover {
+  /* border-top: 1px solid var(--highlight-color); */
+  background-color: #243040;
+}
+
+.timeblock-paragraph-time {
+  font-size: 80%;
 }
 
 .bold {
-  font-weight: bold;
-  border-top: 1px solid black;
+  border-top: 1px solid #465160;
+}
+
+.bold p {
+  font-size: 85%;
+  color: var(--highlight-color);
 }
 
 .selected {
-  background-color: lightcoral;
+  /* border-top: 1px solid var(--highlight-color); */
+  /* background-color: #465160; */
+  background-color: #243040;
+  cursor:unset;
 }

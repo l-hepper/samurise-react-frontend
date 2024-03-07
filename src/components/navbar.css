@@ -1,4 +1,5 @@
 .samurise-brand {
+  color: var(--highlight-color);
   display: inline-block;
   vertical-align: middle;
 }
@@ -17,9 +18,10 @@
 
 .navbar-item a {
   text-decoration: none;
-  color: antiquewhite;
+  color: #edf2f4;
 }
 
 .navbar-item a:hover {
-  color: white;
+  text-decoration: underline;
+  transition: text-decoration 3s ease;
 }
