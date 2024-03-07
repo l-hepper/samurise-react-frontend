@@ -12,10 +12,14 @@
 
 .tasklist-item {
   cursor: pointer;
-  display: block;
+  margin-bottom: 1rem;
 }
 
-.tasklist-item:hover {
+.tasklist-item span {
+    display: inline;
+}
+
+.tasklist-item span:hover {
   text-decoration: line-through;
   text-decoration-color: red;
   text-decoration-thickness: 2px;
@@ -25,4 +29,20 @@
   text-decoration-color: red;
   text-decoration: line-through;
   text-decoration-thickness: 2px;
+}
+
+.add-taskitem-button {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  font-size: 1rem;
+  opacity: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+.add-taskitem-button:hover {
+    opacity: 100%;
 }

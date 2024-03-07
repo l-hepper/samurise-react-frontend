@@ -41,7 +41,7 @@ export default function TaskList() {
   function addTask(event) {
     if (event.key === "Enter" || event.type === "blur") {
       if (!event.target.value) {
-        setAddNewTaskMode((previousState) => (previousState=false));
+        setAddNewTaskMode((previousState) => (previousState = false));
         return;
       }
 
@@ -54,8 +54,8 @@ export default function TaskList() {
     }
   }
 
-  // mark a task as complete
-  function markTaskItemAsComplete(index) {
+  // uses the index of a task item to get from task array and flip its complete flag
+  function markTaskItemAsCompleteOrNotComplete(index) {
     let modifiedTaskList = [...taskList];
     let modifiedTaskItem = modifiedTaskList[index];
     modifiedTaskItem = {
@@ -63,6 +63,12 @@ export default function TaskList() {
       complete: !modifiedTaskItem.complete,
     };
     modifiedTaskList[index] = modifiedTaskItem;
+    setTaskList(modifiedTaskList);
+  }
+
+  function removeTaskItem(index) {
+    let modifiedTaskList = [...taskList];
+    modifiedTaskList.splice(index, 1);
     setTaskList(modifiedTaskList);
   }
 
@@ -79,28 +85,31 @@ export default function TaskList() {
   return (
     <div class="tasklist-section">
       <p class="tasklist-section-label">Task List</p>
-      <div class="tasklist-controls">
-        <button
-          onClick={() =>
-            setAddNewTaskMode((previousState) => (previousState = true))
-          }
-        >
-          Add
-        </button>
-      </div>
+      <div class="tasklist-controls"></div>
       <div class="task-content">
         <p>TimeBlock name goes here</p>
         <ul>
           {taskList.map((item, index) => (
             <li
               key={item.name}
-              onClick={() => markTaskItemAsComplete(index)}
+              onClick={() => markTaskItemAsCompleteOrNotComplete(index)}
+              onDoubleClick={() => removeTaskItem(index)}
               className={"tasklist-item" + (item.complete ? " complete" : "")}
             >
-              {item.name}
+              <span>{item.name}</span>
             </li>
           ))}
-          {addNewTaskMode && <li>{input}</li>}
+          {addNewTaskMode ? (
+            <li>{input}</li>
+          ) : (
+            <button className="add-taskitem-button"
+              onClick={() =>
+                setAddNewTaskMode((previousState) => (previousState = true))
+              }
+            >
+              <img src="add_icon.svg" alt="Icon" /><span>Add</span>
+            </button>
+          )}
         </ul>
       </div>
     </div>
