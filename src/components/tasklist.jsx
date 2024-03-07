@@ -22,6 +22,21 @@ export default function TaskList() {
     }
   }, [addNewTaskMode]);
 
+  // keyboard shortcut function for adding a new task quickly
+  useEffect(() => {
+    function handleKeyPress(event) {
+      if (event.ctrlKey && event.key === "Enter") {
+        setAddNewTaskMode((previousState) => (previousState = true));
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
+
   // add a new task to the list
   function addTask(event) {
     if (event.key === "Enter" || event.type === "blur") {
@@ -29,7 +44,7 @@ export default function TaskList() {
       const modifiedTaskList = [...taskList];
       modifiedTaskList.push(newTask);
       setTaskList(modifiedTaskList);
-      setAddNewTaskMode(previousState => previousState = false);
+      setAddNewTaskMode((previousState) => (previousState = false));
     }
   }
 
@@ -47,7 +62,13 @@ export default function TaskList() {
     <div class="tasklist-section">
       <p class="tasklist-section-label">Task List</p>
       <div class="tasklist-controls">
-        <button onClick={() => setAddNewTaskMode(previousState => previousState = true)}>Add</button>
+        <button
+          onClick={() =>
+            setAddNewTaskMode((previousState) => (previousState = true))
+          }
+        >
+          Add
+        </button>
       </div>
       <div class="task">
         <p>TimeBlock name goes here</p>
