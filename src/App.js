@@ -5,6 +5,7 @@ import Navbar from "./components/navbar";
 import DailyTimeBlock from "./components/daily-timeblock";
 import DateSelect from "./components/date-select";
 import Pomodoro from "./components/pomodoro";
+import TaskList from "./components/tasklist";
 
 export default function App() {
 
@@ -24,9 +25,7 @@ export default function App() {
               <p>Habit Tracker</p>
             </div> */}
           <Pomodoro />
-          <div class="todo">
-            <p>TaskList List</p>
-          </div>
+          <TaskList />
         </div>
       </div>
     </div>

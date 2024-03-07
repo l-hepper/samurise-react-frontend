@@ -1,0 +1,11 @@
+.tasklist-section {
+    font-weight: bold;
+    padding: 1%;
+    margin-top: 2.5%;
+    background-color: burlywood;
+    border-radius: 5px;
+  }
+
+.tasklist-section-label {
+    text-align: center;
+}
