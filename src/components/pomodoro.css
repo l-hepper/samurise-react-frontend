@@ -3,14 +3,16 @@
 }
 
 .pomodoro-timer {
-  padding: 2%;
-  margin-top: 6.2%;
+  margin-top: 1.7%;
   border-radius: 5px;
-  background-color: crimson;
+  background-color: transparent;
 }
 
 .pomodoro-section-label {
-  margin: 0 10% 1% 0;
+  color: var(--font-color);
+  font-size: 1.3rem;
+  border-bottom: 1px solid var(--font-color);
+  margin: 0 0% 1% 0;
   font-weight: bold;
 }
 
@@ -19,12 +21,13 @@
 }
 
 .timer-select {
-  color: antiquewhite;
-  border: 2px solid antiquewhite;
+  cursor: pointer;
+  color: var(--highlight-color);
+  border: 2px solid var(--highlight-color);;
   font-size: 1.5rem;
+  padding: 0.7rem;
   border-radius: 5px;
   background-color: transparent;
-  padding: 0.7rem;
 }
 
 .timer-select:hover {
@@ -32,8 +35,10 @@
   border-color: white;
 }
 
-.counting {
-  padding-right: 1.83rem;
+.counting:hover {
+  cursor: unset;
+  color: var(--highlight-color);
+  border-color: var(--highlight-color);
 }
 
 .timer {
@@ -41,11 +46,11 @@
 }
 
 .begin-button {
-  color: antiquewhite;
+  color: var(--highlight-color);
   background-color: transparent;
-  border: 2px solid antiquewhite;
+  border: 2px solid var(--highlight-color);
   border-radius: 5px;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   margin-left: 0.5rem;
   cursor:pointer;
 }
@@ -53,4 +58,9 @@
 .begin-button:hover {
   color: white;
   border-color: white;
+}
+
+.daily-stats {
+  margin-left: auto;
+  color: var(--font-color);
 }

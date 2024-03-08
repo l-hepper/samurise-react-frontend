@@ -13,6 +13,10 @@ export default function Pomodoro() {
   }
 
   function beginCountDown() {
+    if (countingDown) {
+      setCountingDown((previousState) => !previousState);
+      return;
+    }
     setSecondsLeft(59);
     setMinutesLeft(timeSelected - 1);
     setCountingDown(true);
@@ -68,7 +72,6 @@ export default function Pomodoro() {
         ":" +
         (secondsLeft > 9 ? secondsLeft : "0" + secondsLeft)}
     </option>
-
   );
   return (
     <div class="pomodoro-timer">
@@ -77,13 +80,15 @@ export default function Pomodoro() {
       </div>
       <div class="timer">
         <div class="countdown">
-          {countingDown
-            ? timerCountDown
-            : timerSelect}
+          {countingDown ? timerCountDown : timerSelect}
         </div>
         <button class="begin-button" onClick={beginCountDown}>
-          Begin
+          {countingDown ? "Stop" : "Begin"}
         </button>
+        <div class="daily-stats">
+          <p>Total Productive Minutes: 125</p>
+          <p></p>
+        </div>
       </div>
     </div>
   );
