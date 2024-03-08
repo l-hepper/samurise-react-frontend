@@ -8,7 +8,6 @@ import Pomodoro from "./components/pomodoro";
 import TaskList from "./components/tasklist";
 
 export default function App() {
-
   // this will be used between DailyTimeBlock and TaskList to render the correct TaskList for the selected timeblock
   const [selectedTimeBlock, setSelectedTimeBlock] = useState();
 

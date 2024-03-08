@@ -164,7 +164,7 @@ export default function DailyTimeBlock() {
   return (
     <div class="daily-timeblock">
       <div class="daily-timeblock-controls">
-        <p class="daily-timeblock-section-label">TimeBlock Planner</p>
+        <p class="daily-timeblock-section-label">Planner</p>
         <DateSelect />
         <button
           class="daily-timeblock-settings-button"

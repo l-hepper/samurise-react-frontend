@@ -7,11 +7,9 @@
   margin-top: 6.2%;
   border-radius: 5px;
   background-color: crimson;
-  height: 15%;
 }
 
 .pomodoro-section-label {
-  display: inline-block;
   margin: 0 10% 1% 0;
   font-weight: bold;
 }
@@ -40,7 +38,6 @@
 
 .timer {
   display: flex;
-  height: 55%;
 }
 
 .begin-button {
@@ -50,7 +47,6 @@
   border-radius: 5px;
   font-size: 1.7rem;
   margin-left: 0.5rem;
-  height: 120%;
   cursor:pointer;
 }
 

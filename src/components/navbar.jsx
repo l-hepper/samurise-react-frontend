@@ -5,7 +5,7 @@ export default function Navbar() {
   return (
     <header>
       <div class="samurise-brand">
-        <h1>Samurise</h1>
+        <h1>S A M U R I S E</h1>
       </div>
       <nav class="navbar">
         <ul class="navbar-list">
