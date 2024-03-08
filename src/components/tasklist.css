@@ -1,48 +1,73 @@
 .tasklist-section {
-  font-weight: bold;
-  padding: 1%;
-  margin-top: 2.5%;
-  background-color: burlywood;
+  padding: 1rem;
+  margin-top: 3rem;
+  color: var(--font-color);
+  background-color: #243040;
   border-radius: 5px;
 }
 
 .tasklist-section-label {
+  margin:0;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border-bottom: 1px solid var(--font-color);
   text-align: center;
 }
 
+.task-content {
+  padding: 1rem;
+}
+
+.timeblock-name {
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+}
+
 .tasklist-item {
+  color: var(--highlight-color);
   cursor: pointer;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  list-style: square;
 }
 
 .tasklist-item span {
-    display: inline;
+  color: var(--font-color);
+  display: inline;
 }
 
 .tasklist-item span:hover {
   text-decoration: line-through;
-  text-decoration-color: red;
+  text-decoration-color: var(--highlight-color);
   text-decoration-thickness: 2px;
 }
 
 .complete {
   text-decoration: line-through;
-  text-decoration-color: red;
+  text-decoration-color: var(--highlight-color);
   text-decoration-thickness: 2px;
+  opacity: 65%;
 }
 
 .add-taskitem-button {
-  padding: 0;
+  color: var(--highlight-color);
   display: flex;
-  align-items: center;
-  justify-content: center;
   background-color: transparent;
   font-size: 1rem;
-  opacity: 50%;
   cursor: pointer;
   border: none;
 }
 
+.add-taskitem-button path{
+  fill: var(--highlight-color);
+}
+
 .add-taskitem-button:hover {
-    opacity: 100%;
+  color: var(--font-color);
+}
+
+.add-taskitem-button:hover path{
+  fill: var(--font-color);
 }

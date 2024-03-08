@@ -84,10 +84,9 @@ export default function TaskList() {
 
   return (
     <div class="tasklist-section">
-      <p class="tasklist-section-label">Task List</p>
-      <div class="tasklist-controls"></div>
+      <p class="tasklist-section-label">Tasks</p>
       <div class="task-content">
-        <p>TimeBlock name goes here</p>
+        <p class="timeblock-name">LeetCode 3 Questions: 9:00 - 10:00</p>
         <ul>
           {taskList.map((item, index) => (
             <li
@@ -107,7 +106,7 @@ export default function TaskList() {
                 setAddNewTaskMode((previousState) => (previousState = true))
               }
             >
-              <img src="add_icon.svg" alt="Icon" /><span>Add</span>
+              <svg xmlns="http://www.w3.org/2000/svg" height="15" viewBox="0 -960 960 960" width="15"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg><span> Add</span>
             </button>
           )}
         </ul>
