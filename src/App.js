@@ -15,7 +15,6 @@ export default function App() {
   return (
     <div>
       <Navbar />
-      <DateSelect />
       <div class="samurise-dashboard">
         <div class="left-page">
           <DailyTimeBlock />

@@ -1,12 +1,23 @@
-.date-select {
-  margin-left: 5%;
-}
 
-.date-select h3 {
+.date-select p {
+  color: var(--font-color);
+  font-size: 1.3rem;
+  vertical-align: middle;
+  margin: 0rem 0.5rem 0 0.5rem;
+  padding: 0;
   display: inline-block;
-  margin: 0 10px 10px 10px;
 }
 
 .date-select-button {
+  color: var(--highlight-color);
+  font-weight: bold;
   display: inline-block;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0px 0px 0px 0px;
+}
+
+.date-select-button:hover {
+  color:var(--font-color);
 }

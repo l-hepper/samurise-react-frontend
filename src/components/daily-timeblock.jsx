@@ -4,6 +4,7 @@ import { useState } from "react";
 import "./daily-timeblock.css";
 
 import DailyTimeBlockPeriod15 from "./daily-timeblock-period-15";
+import DateSelect from "./date-select";
 
 // global values set outside of function to ensure they persist beyond state update
 let startTimeBlock = null;
@@ -99,9 +100,10 @@ export default function DailyTimeBlock() {
 
     storedNameFunction(); // calls editName in daily-timeblock-period-15 which then calls the two functions below
   }
-  
+
   function setTimeBlockName(name) {
-    timeBlockArray[startTimeBlockIndex].name = name + " : " + startTimeBlock.startTime + " - " + endTimeBlock.endTime;
+    timeBlockArray[startTimeBlockIndex].name =
+      name + " : " + startTimeBlock.startTime + " - " + endTimeBlock.endTime;
   }
 
   function storeEventInEventArray(eventName) {
@@ -134,7 +136,7 @@ export default function DailyTimeBlock() {
     for (let i = targetedEvent.startIndex; i <= targetedEvent.endIndex; i++) {
       modifiedArray[i].scheduled = false;
     }
-    
+
     eventArray.splice(index, 1);
     setTimeBlockArray(modifiedArray);
     clearBlockSelections();
@@ -162,9 +164,25 @@ export default function DailyTimeBlock() {
   return (
     <div class="daily-timeblock">
       <div class="daily-timeblock-controls">
-        <button onClick={handleDayLengthButtonClick}>Set Day Length</button>
+        <p class="daily-timeblock-section-label">TimeBlock Planner</p>
+        <DateSelect />
+        <button
+          class="daily-timeblock-settings-button"
+          onClick={handleDayLengthButtonClick}
+        >
+          <div class="settings-svg-div">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="22"
+              viewBox="0 -960 960 960"
+              width="22"
+            >
+              <path d="M440-120v-240h80v80h320v80H520v80h-80Zm-320-80v-80h240v80H120Zm160-160v-80H120v-80h160v-80h80v240h-80Zm160-80v-80h400v80H440Zm160-160v-240h80v80h160v80H680v80h-80Zm-480-80v-80h400v80H120Z" />
+            </svg>
+          </div>
+        </button>
       </div>
-      
+
       <div class="daily-timeblock-array">
         <div class="daily-timeblock-period-hour">
           {timeBlockArray.map((timeBlock, index) => (

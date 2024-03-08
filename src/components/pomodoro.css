@@ -4,8 +4,7 @@
 
 .pomodoro-timer {
   padding: 2%;
-
-  margin-top: 2.5%;
+  margin-top: 6.2%;
   border-radius: 5px;
   background-color: crimson;
   height: 15%;
@@ -36,7 +35,7 @@
 }
 
 .counting {
-  padding-right: 1.85rem;
+  padding-right: 1.83rem;
 }
 
 .timer {

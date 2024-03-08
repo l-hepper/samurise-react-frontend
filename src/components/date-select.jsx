@@ -20,7 +20,7 @@ export default function DateSelect() {
   return (
     <div class="date-select">
       <button onClick={decrementDate} class="date-select-button">&lt;</button>
-      <h3>{date.toLocaleDateString()}</h3>
+      <p>{date.toLocaleDateString()}</p>
       <button onClick={incrementDate }class="date-select-button">&gt;</button>
     </div>
   );

@@ -4,13 +4,42 @@
   margin-left: 5%;
 }
 
+.daily-timeblock-controls {
+  border-bottom: 1px solid var(--font-color);
+  width: 96%;
+  margin-top: 5%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.daily-timeblock-section-label {
+  color: var(--font-color);
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin: 0;
+  padding: 0;
+}
+
+.daily-timeblock-settings-button {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.daily-timeblock-settings-button * {
+  fill: var(--highlight-color);
+}
+
+.settings-svg-div:hover path {
+  fill: var(--font-color);
+}
+
 .create-timeblock-button {
   width: 100px;
   height: 50px;
 }
 
 .daily-timeblock-array {
-  margin-top: 1rem;
   background-color: var(--background-color);
   border-radius: 5px;
   padding: 1rem 0rem 0rem 3rem;
@@ -31,13 +60,15 @@
 }
 
 .timeblock-paragraph-name {
-  color: var(--font-color);
+  color: var(--font-color) !important;
+  font-weight: bold;
   display: inline;
   margin: 0;
-  font-size: 12px;
+  font-size: 12px !important;
 }
 
 .timeblock-button {
+  cursor: pointer;
   background: transparent;
   font-size: 99%;
   border: none;
@@ -54,6 +85,8 @@
 }
 
 .edit-name-input {
+  color: var(--font-color);
+  font-weight: bold;
   font-size: 100%;
   outline: none;
   border: none;
@@ -63,7 +96,7 @@
 
 .daily-timeblock-period-15 {
   cursor: pointer;
-  border-top: 1px dashed #465160; 
+  border-top: 1px dashed #465160;
   margin-right: 5%;
   transition: background-color 0.2s ease;
 }
@@ -74,7 +107,7 @@
 }
 
 .timeblock-paragraph-time {
-  font-size: 80%;
+  font-size: 75%;
 }
 
 .bold {
@@ -82,13 +115,14 @@
 }
 
 .bold p {
-  font-size: 85%;
   color: var(--highlight-color);
+  font-size: 85%;
+  top: -11px;
 }
 
 .selected {
   /* border-top: 1px solid var(--highlight-color); */
   /* background-color: #465160; */
   background-color: #243040;
-  cursor:unset;
+  cursor: unset;
 }
