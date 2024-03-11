@@ -30,10 +30,7 @@ let taskListArray = [];
 
 export default function App() {
   // this will be used between DailyTimeBlock and TaskList to render the correct TaskList for the selected timeblock
-  const [taskList, setTaskList] = useState({
-    taskListName: "Test",
-    taskListItems: [{ name: "Testing 1", complete: false }],
-  });
+  const [taskList, setTaskList] = useState();
 
   function switchTaskListView(timeBlockName) {
     const taskListObject = taskListArray.find(

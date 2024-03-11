@@ -81,9 +81,9 @@ export default function TaskList({taskList, setTaskList}) {
     <div class="tasklist-section">
       <p class="tasklist-section-label">Tasks</p>
       <div class="task-content">
-        <p class="timeblock-name">{taskList.taskListName}</p>
+        <p class="timeblock-name">{taskList ? taskList.taskListName : null}</p>
         <ul>
-          {taskList.taskListItems.map((item, index) => (
+          {taskList ? (taskList.taskListItems.map((item, index) => (
             <li
               key={item.name}
               onClick={() => markTaskItemAsCompleteOrNotComplete(index)}
@@ -92,8 +92,8 @@ export default function TaskList({taskList, setTaskList}) {
             >
               <span>{item.name}</span>
             </li>
-          ))}
-          {addNewTaskMode ? (
+          ))) : null}
+          {taskList ? addNewTaskMode ? (
             <li>{input}</li>
           ) : (
             <button className="add-taskitem-button"
@@ -103,7 +103,7 @@ export default function TaskList({taskList, setTaskList}) {
             >
               <svg xmlns="http://www.w3.org/2000/svg" height="15" viewBox="0 -960 960 960" width="15"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg><span> Add</span>
             </button>
-          )}
+          ) : null}
         </ul>
       </div>
     </div>
