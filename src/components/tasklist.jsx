@@ -62,8 +62,8 @@ export default function TaskList({taskList, setTaskList}) {
   }
 
   function removeTaskItem(index) {
-    let modifiedTaskList = [...taskList];
-    modifiedTaskList.splice(index, 1);
+    const modifiedTaskList = {...taskList};
+    modifiedTaskList.taskListItems.splice(index, 1);
     setTaskList(modifiedTaskList);
   }
 
