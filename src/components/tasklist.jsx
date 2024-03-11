@@ -3,15 +3,9 @@ import { useState, useRef, useEffect } from "react";
 
 import "./tasklist.css";
 
-// for debugging use
-const dummyTaskList = [
-  { name: "Git Course - complete section 5", complete: false },
-  { name: "LeetCode 5 questions", complete: false },
-  { name: "Update resume with samurise", complete: false },
-];
 
-export default function TaskList() {
-  const [taskList, setTaskList] = useState(dummyTaskList);
+
+export default function TaskList({taskList, setTaskList}) {
   const [addNewTaskMode, setAddNewTaskMode] = useState(false);
   const inputRef = useRef(null);
 
@@ -44,11 +38,12 @@ export default function TaskList() {
         setAddNewTaskMode((previousState) => (previousState = false));
         return;
       }
-
       const newTaskName = event.target.value;
       const newTask = { name: newTaskName, complete: false };
-      const modifiedTaskList = [...taskList];
-      modifiedTaskList.push(newTask);
+
+      const modifiedTaskList = {...taskList};
+      modifiedTaskList.taskListItems.push(newTask);
+
       setTaskList(modifiedTaskList);
       setAddNewTaskMode((previousState) => (previousState = false));
     }
@@ -56,13 +51,13 @@ export default function TaskList() {
 
   // uses the index of a task item to get from task array and flip its complete flag
   function markTaskItemAsCompleteOrNotComplete(index) {
-    let modifiedTaskList = [...taskList];
-    let modifiedTaskItem = modifiedTaskList[index];
+    const modifiedTaskList = {...taskList};
+    let modifiedTaskItem = modifiedTaskList.taskListItems[index];
     modifiedTaskItem = {
       ...modifiedTaskItem,
       complete: !modifiedTaskItem.complete,
     };
-    modifiedTaskList[index] = modifiedTaskItem;
+    modifiedTaskList.taskListItems[index] = modifiedTaskItem;
     setTaskList(modifiedTaskList);
   }
 
@@ -86,9 +81,9 @@ export default function TaskList() {
     <div class="tasklist-section">
       <p class="tasklist-section-label">Tasks</p>
       <div class="task-content">
-        <p class="timeblock-name">LeetCode 3 Questions: 9:00 - 10:00</p>
+        <p class="timeblock-name">{taskList.taskListName}</p>
         <ul>
-          {taskList.map((item, index) => (
+          {taskList.taskListItems.map((item, index) => (
             <li
               key={item.name}
               onClick={() => markTaskItemAsCompleteOrNotComplete(index)}

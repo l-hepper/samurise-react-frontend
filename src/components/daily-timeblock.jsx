@@ -14,7 +14,7 @@ let endTimeBlockIndex = null;
 let eventLength = null;
 let storedNameFunction = null;
 
-export default function DailyTimeBlock() {
+export default function DailyTimeBlock(props) {
   const [newTimeBlockMode, setNewTimeBlockMode] = useState(false);
   const [userInformation, setUserInformation] = useState();
   const [dayLength, setDayLength] = useState(8); // debugging only
@@ -37,6 +37,7 @@ export default function DailyTimeBlock() {
             Number(dayStart) + i + timeBlockEndings[j]
           ),
           scheduled: false,
+          startOfBlock: false,
         });
       }
     }
@@ -65,6 +66,7 @@ export default function DailyTimeBlock() {
       i++
     ) {
       timeBlockArray[i].scheduled = false;
+      timeBlockArray[i].startOfBlock = null;
       timeBlockArray[i].name = null;
     }
     clearBlockSelections();
@@ -83,6 +85,7 @@ export default function DailyTimeBlock() {
   function selectStartTime(timeBlock, index, nameFunction) {
     timeBlockArray[index].name = "Select end time...";
     timeBlockArray[index].scheduled = true;
+    timeBlockArray[index].startOfBlock = true;
     setNewTimeBlockMode((state) => (state = true));
     startTimeBlock = timeBlock;
     startTimeBlockIndex = index;
@@ -102,8 +105,15 @@ export default function DailyTimeBlock() {
   }
 
   function setTimeBlockName(name) {
-    timeBlockArray[startTimeBlockIndex].name =
-      name + " : " + startTimeBlock.startTime + " - " + endTimeBlock.endTime;
+    let modifiedArray = [...timeBlockArray];
+    let formattedName = name + " : " + startTimeBlock.startTime + " - " + endTimeBlock.endTime;
+    for (let i = startTimeBlockIndex; i <= endTimeBlockIndex; i++) {
+      modifiedArray[i].name = formattedName;
+    }
+    setTimeBlockArray(modifiedArray);
+
+    // create a new empty task list for this block
+    props.createNewTaskListForBlock(formattedName);
   }
 
   function storeEventInEventArray(eventName) {
@@ -128,13 +138,10 @@ export default function DailyTimeBlock() {
     }
 
     let modifiedArray = [...timeBlockArray];
-    modifiedArray[targetedEvent.startIndex] = {
-      ...modifiedArray[targetedEvent.startIndex],
-      name: null,
-    };
-
     for (let i = targetedEvent.startIndex; i <= targetedEvent.endIndex; i++) {
+      modifiedArray[i].name = null;
       modifiedArray[i].scheduled = false;
+      modifiedArray[i].startOfBlock = false;
     }
 
     eventArray.splice(index, 1);
@@ -195,6 +202,7 @@ export default function DailyTimeBlock() {
               deleteTimeBlock={deleteTimeBlock}
               setTimeBlockName={setTimeBlockName}
               storeEventInEventArray={storeEventInEventArray}
+              switchTaskListView={props.switchTaskListView}
             />
           ))}
         </div>
