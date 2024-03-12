@@ -5,7 +5,7 @@ import "./tasklist.css";
 
 
 
-export default function TaskList({taskList, setTaskList}) {
+export default function TaskList({taskList, setTaskList, taskListColor}) {
   const [addNewTaskMode, setAddNewTaskMode] = useState(false);
   const inputRef = useRef(null);
 
@@ -78,7 +78,7 @@ export default function TaskList({taskList, setTaskList}) {
   );
 
   return (
-    <div class="tasklist-section">
+    <div class={"tasklist-section " + taskListColor}>
       <p class="tasklist-section-label">Tasks</p>
       <div class="task-content">
         <p class="timeblock-name">{taskList ? taskList.taskListName : null}</p>

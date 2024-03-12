@@ -71,3 +71,19 @@
 .add-taskitem-button:hover path{
   fill: var(--font-color);
 }
+
+.rust {
+  background-color:#553040;
+}
+
+.gray {
+  background-color: #243040;
+}
+
+.blue {
+  background-color: #243051;
+}
+
+.green {
+  background-color: #244040;
+}

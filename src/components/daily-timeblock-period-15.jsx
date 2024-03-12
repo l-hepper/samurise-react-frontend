@@ -30,7 +30,7 @@ export default function DailyTimeBlockPeriod15(props) {
 
   function handleClick() {
     if (props.timeBlock.scheduled) {
-      props.switchTaskListView(props.timeBlock.name);
+      props.switchTaskListView(props.timeBlock.name, props.timeBlock.color);
       return;
     }
 
@@ -112,13 +112,6 @@ export default function DailyTimeBlockPeriod15(props) {
         class="color-select-option green"
         onClick={() => handleChangeColor("green")}
         onMouseOver={() => testColorChange("green")}
-      >
-        <span>A</span>
-      </div>
-      <div
-        class="color-select-option goldenrod"
-        onClick={() => handleChangeColor("goldenrod")}
-        onMouseOver={() => testColorChange("goldenrod")}
       >
         <span>A</span>
       </div>

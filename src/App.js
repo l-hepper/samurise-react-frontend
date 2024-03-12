@@ -33,17 +33,27 @@ let taskListArray = [];
 export default function App() {
   // this will be used between DailyTimeBlock and TaskList to render the correct TaskList for the selected timeblock
   const [taskList, setTaskList] = useState();
+  const [taskListColor, setTaskListColor] = useState();
 
-  function switchTaskListView(timeBlockName) {
+  function switchTaskListView(timeBlockName, timeBlockColor) {
+    if (timeBlockName === null) {
+      setTaskList(null);
+      setTaskListColor("gray");
+    }
     const taskListObject = taskListArray.find(
       (item) => item.taskListName === timeBlockName
     );
+    setTaskListColor(timeBlockColor);
     setTaskList(taskListObject);
   }
 
   function createNewTaskListForBlock(timeBlockName) {
-    taskListArray.push({ taskListName: timeBlockName, taskListItems: []});
+    taskListArray.push({ taskListName: timeBlockName, taskListItems: [] });
     switchTaskListView(timeBlockName);
+  }
+
+  function deleteTaskList(timeBlockName) {
+    taskListArray.splice((item) => item.taskListName = timeBlockName);
   }
 
   return (
@@ -55,11 +65,16 @@ export default function App() {
             taskListArray={taskListArray}
             switchTaskListView={switchTaskListView}
             createNewTaskListForBlock={createNewTaskListForBlock}
+            deleteTaskList={deleteTaskList}
           />
         </div>
         <div class="right-page">
           <Pomodoro />
-          <TaskList taskList={taskList} setTaskList={setTaskList} />
+          <TaskList
+            taskList={taskList}
+            setTaskList={setTaskList}
+            taskListColor={taskListColor}
+          />
         </div>
       </div>
     </div>
