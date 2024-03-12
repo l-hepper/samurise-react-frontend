@@ -72,7 +72,53 @@
   background: transparent;
   font-size: 99%;
   border: none;
-  margin-right: 5px;
+}
+
+.color {
+  margin-right: 10px;
+  padding-left: 0;
+}
+
+.color-select {
+  margin-top: -0.325rem;
+  vertical-align: middle;
+
+  padding-left: 0.5rem;
+  display: inline-flex;
+}
+
+.color-select-option {
+  vertical-align: middle;
+  border: 1px white solid;
+  cursor: pointer;
+  width: 1rem;
+  margin-right: 0.5rem;
+  font-size: 10px;
+}
+
+.color-select-option span {
+  vertical-align: middle;
+  visibility: hidden;
+}
+
+.rust {
+  background-color: #6c2323;
+}
+
+.gray {
+  background-color: #243040;
+}
+
+.blue {
+  background-color: #23406c;
+}
+
+.green {
+  background-color: #304024;
+}
+
+.goldenrod {
+  background-color: #a07316;
 }
 
 .timeblock-button svg {
@@ -101,7 +147,7 @@
   transition: background-color 0.2s ease;
 }
 
-.daily-timeblock-period-15:hover {
+.daily-timeblock-period-15:not(.scheduled):hover {
   /* border-top: 1px solid var(--highlight-color); */
   background-color: #243040;
 }
@@ -123,6 +169,6 @@
 .selected {
   /* border-top: 1px solid var(--highlight-color); */
   /* background-color: #465160; */
-  background-color: #243040;
+  /* background-color: #243040; */
   cursor: unset;
 }

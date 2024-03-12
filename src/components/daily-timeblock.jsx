@@ -38,6 +38,7 @@ export default function DailyTimeBlock(props) {
           ),
           scheduled: false,
           startOfBlock: false,
+          color: "gray",
         });
       }
     }
@@ -106,7 +107,8 @@ export default function DailyTimeBlock(props) {
 
   function setTimeBlockName(name) {
     let modifiedArray = [...timeBlockArray];
-    let formattedName = name + " : " + startTimeBlock.startTime + " - " + endTimeBlock.endTime;
+    let formattedName =
+      name + " : " + startTimeBlock.startTime + " - " + endTimeBlock.endTime;
     for (let i = startTimeBlockIndex; i <= endTimeBlockIndex; i++) {
       modifiedArray[i].name = formattedName;
     }
@@ -127,6 +129,16 @@ export default function DailyTimeBlock(props) {
     clearBlockSelections();
   }
 
+  function handleChangeColor(color, index) {
+    let modifiedTimeBlockArray = [...timeBlockArray];
+    let name = modifiedTimeBlockArray[index].name;
+    while ((modifiedTimeBlockArray[index].name === name)) {
+      modifiedTimeBlockArray[index].color = color;
+      index++;
+    }
+    setTimeBlockArray(modifiedTimeBlockArray);
+  }
+
   function deleteTimeBlock(index) {
     // get the targeted event
     let targetedEvent = eventArray.find((item) => item.startIndex === index);
@@ -142,6 +154,7 @@ export default function DailyTimeBlock(props) {
       modifiedArray[i].name = null;
       modifiedArray[i].scheduled = false;
       modifiedArray[i].startOfBlock = false;
+      modifiedArray[i].color = "gray";
     }
 
     eventArray.splice(index, 1);
@@ -203,6 +216,7 @@ export default function DailyTimeBlock(props) {
               setTimeBlockName={setTimeBlockName}
               storeEventInEventArray={storeEventInEventArray}
               switchTaskListView={props.switchTaskListView}
+              handleChangeColor={handleChangeColor}
             />
           ))}
         </div>

@@ -10,6 +10,7 @@ import TaskList from "./components/tasklist";
 const taskListArrayDummy = [
   {
     taskListName: "testing : 9:00 - 10:00",
+    color: "grey",
     taskList: [
       { name: "Git Course - complete section 5", complete: false },
       { name: "LeetCode 5 questions", complete: false },
@@ -18,6 +19,7 @@ const taskListArrayDummy = [
   },
   {
     taskListName: "whatever : 12:00 - 13:00",
+    color: "grey",
     taskList: [
       { name: "whatever 1", complete: false },
       { name: "whatever 2", complete: false },
