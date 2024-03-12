@@ -149,7 +149,6 @@ export default function DailyTimeBlock(props) {
       cancelSelection();
     }
     props.deleteTaskList(timeBlockArray[index].name);
-    props.switchTaskListView(null);
 
     let modifiedArray = [...timeBlockArray];
     for (let i = targetedEvent.startIndex; i <= targetedEvent.endIndex; i++) {

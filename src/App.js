@@ -39,6 +39,7 @@ export default function App() {
     if (timeBlockName === null) {
       setTaskList(null);
       setTaskListColor("gray");
+      return;
     }
     const taskListObject = taskListArray.find(
       (item) => item.taskListName === timeBlockName
@@ -53,7 +54,15 @@ export default function App() {
   }
 
   function deleteTaskList(timeBlockName) {
-    taskListArray.splice((item) => item.taskListName = timeBlockName);
+    let indexToRemove = taskListArray.findIndex(
+      (item) => item.taskListName === timeBlockName
+    );
+
+    // if the task list to be removed is currently shown - then remove it from screen to reflect the deletion
+    if (taskList.taskListName === timeBlockName) {
+      switchTaskListView(null);
+    }
+    taskListArray.splice(indexToRemove, 1);
   }
 
   return (
