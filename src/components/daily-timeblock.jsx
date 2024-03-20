@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import "./daily-timeblock.css";
 
@@ -22,6 +22,12 @@ export default function DailyTimeBlock(props) {
     populateTimeBlocks(9, 8)
   );
   const [eventArray, setEventArray] = useState([]);
+
+  useEffect(() => {
+    if (props.day.dayStartTime != undefined) {
+      setTimeBlockArray(populateTimeBlocks(props.day.dayStartTime, props.day.dayLength));
+    }
+  }, [props.day]);
 
   // populates an array of empty timeblocks according to the size of the dayLength variable
   function populateTimeBlocks(dayStart, newDayLength) {
@@ -132,7 +138,7 @@ export default function DailyTimeBlock(props) {
   function handleChangeColor(color, index) {
     let modifiedTimeBlockArray = [...timeBlockArray];
     let name = modifiedTimeBlockArray[index].name;
-    while ((modifiedTimeBlockArray[index].name === name)) {
+    while (modifiedTimeBlockArray[index].name === name) {
       modifiedTimeBlockArray[index].color = color;
       index++;
     }
@@ -186,7 +192,11 @@ export default function DailyTimeBlock(props) {
     <div class="daily-timeblock">
       <div class="daily-timeblock-controls">
         <p class="daily-timeblock-section-label">Planner</p>
-        <DateSelect day={props.day} incrementDay={props.incrementDay} decrementDay={props.decrementDay}/>
+        <DateSelect
+          day={props.day}
+          incrementDay={props.incrementDay}
+          decrementDay={props.decrementDay}
+        />
         <button
           class="daily-timeblock-settings-button"
           onClick={handleDayLengthButtonClick}
