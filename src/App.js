@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getDayById } from "./http";
 
 import Navbar from "./components/navbar";
 import DailyTimeBlock from "./components/daily-timeblock";
@@ -34,6 +35,59 @@ export default function App() {
   // this will be used between DailyTimeBlock and TaskList to render the correct TaskList for the selected timeblock
   const [taskList, setTaskList] = useState();
   const [taskListColor, setTaskListColor] = useState();
+
+  const [isFetching, setIsFetching] = useState();
+  const [fetchedDay, setFetchedDay] = useState([]);
+  const [error, setError] = useState();
+
+  useEffect(() => {
+    async function fetchDay() {
+      setIsFetching(true);
+
+      try {
+        const day = await getDayById(1);
+        setFetchedDay(day);
+      } catch (error) {
+        setError(error);
+      }
+
+      setIsFetching(false);
+    }
+
+    fetchDay();
+  }, []);
+
+  if (error) {
+    alert(error.message);
+  }
+
+  async function incrementDay() {
+    const incrementedID = fetchedDay.id + 1;
+    setIsFetching(true);
+
+    try {
+      const day = await getDayById(incrementedID);
+      setFetchedDay(day);
+    } catch (error) {
+      alert("Unable to go beyond " + fetchedDay.date);
+    }
+
+    setIsFetching(false);
+  }
+
+  async function decrementDay() {
+    const decrementedID = fetchedDay.id - 1;
+    setIsFetching(true);
+
+    try {
+      const day = await getDayById(decrementedID);
+      setFetchedDay(day);
+    } catch (error) {
+      alert("Unable to go beyond " + fetchedDay.date);
+    }
+
+    setIsFetching(false);
+  }
 
   function switchTaskListView(timeBlockName, timeBlockColor) {
     if (timeBlockName === null) {
@@ -71,6 +125,9 @@ export default function App() {
       <div class="samurise-dashboard">
         <div class="left-page">
           <DailyTimeBlock
+            day={fetchedDay}
+            incrementDay={incrementDay}
+            decrementDay={decrementDay}
             taskListArray={taskListArray}
             switchTaskListView={switchTaskListView}
             createNewTaskListForBlock={createNewTaskListForBlock}

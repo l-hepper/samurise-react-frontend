@@ -186,7 +186,7 @@ export default function DailyTimeBlock(props) {
     <div class="daily-timeblock">
       <div class="daily-timeblock-controls">
         <p class="daily-timeblock-section-label">Planner</p>
-        <DateSelect />
+        <DateSelect day={props.day} incrementDay={props.incrementDay} decrementDay={props.decrementDay}/>
         <button
           class="daily-timeblock-settings-button"
           onClick={handleDayLengthButtonClick}
