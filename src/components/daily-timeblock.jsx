@@ -22,12 +22,21 @@ export default function DailyTimeBlock(props) {
     populateTimeBlocks(9, 8)
   );
   const [eventArray, setEventArray] = useState([]);
+  const [forceUpdate, setForceUpdate] = useState(false); // ugly but necessary
 
   useEffect(() => {
-    if (props.day.dayStartTime != undefined) {
-      setTimeBlockArray(populateTimeBlocks(props.day.dayStartTime, props.day.dayLength));
+    async function getTimeBlockSchedule() {
+      const response = await fetch(
+        "http://localhost:8080/get-timeblock-schedule/" + props.day.id
+      );
+      const responseData = await response.json();
+      if (responseData) {
+        responseData[0].startTime; // i don't know why it doesn't work without this but it doesn't
+        setTimeBlockArray([...responseData]);
+      }
     }
-  }, [props.day]);
+    getTimeBlockSchedule();
+  }, [props.day.id]);
 
   // populates an array of empty timeblocks according to the size of the dayLength variable
   function populateTimeBlocks(dayStart, newDayLength) {
