@@ -42,6 +42,8 @@ export default function App() {
   const [fetchedDay, setFetchedDay] = useState([]);
   const [error, setError] = useState();
 
+  const [fetchedTaskListArray, setFetchedTaskListArray] = useState();
+
   useEffect(() => {
     async function fetchDay() {
       setIsFetching(true);
@@ -97,11 +99,23 @@ export default function App() {
       setTaskListColor("gray");
       return;
     }
-    const taskListObject = taskListArray.find(
-      (item) => item.taskListName === timeBlockName
-    );
+    getTaskList(timeBlockName);
     setTaskListColor(timeBlockColor);
-    setTaskList(taskListObject);
+    // const taskListObject = taskListArray.find(
+    //   (item) => item.taskListName === timeBlockName
+    // );
+    // setTaskListColor(timeBlockColor);
+    // setTaskList(taskListObject);
+  }
+
+  async function getTaskList(timeBlockName) {
+    const response = await fetch(
+      "http://localhost:8080/get-task-list/" + timeBlockName
+    );
+    let responseData = await response.json();
+    if (response.ok) {
+      setTaskList(responseData);
+    }
   }
 
   function createNewTaskListForBlock(timeBlockName) {

@@ -20,6 +20,17 @@ export async function getToday() {
   return responseData;
 }
 
+export async function getTaskListArray() {
+  const response = await fetch("http://localhost:8080/get-task-list-array/1");
+  const responseData = await response.json();
+
+  if (!response.ok) {
+    throw Error("Fetching data failed");
+  }
+
+  return responseData;
+}
+
 export async function getDayByDate(date) {
   const response = await fetch("http://localhost:8080/get-day-by-date/" + date);
   const responseData = await response.json();
