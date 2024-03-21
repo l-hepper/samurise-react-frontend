@@ -50,3 +50,17 @@ body {
   border-top: 2px solid var(--highlight-color);
 }
 
+/* .start-new-day-container {
+  margin-top: 3rem;
+  border: 1px green dashed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.start-new-day-button {
+  align-items: center;
+  border: 1px red dashed;
+} */
+

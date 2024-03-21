@@ -6,6 +6,8 @@ import "./daily-timeblock.css";
 import DailyTimeBlockPeriod15 from "./daily-timeblock-period-15";
 import DateSelect from "./date-select";
 
+import { postTimeBlock } from "../http";
+
 // global values set outside of function to ensure they persist beyond state update
 let startTimeBlock = null;
 let startTimeBlockIndex = null;
@@ -22,7 +24,6 @@ export default function DailyTimeBlock(props) {
     populateTimeBlocks(9, 8)
   );
   const [eventArray, setEventArray] = useState([]);
-  const [forceUpdate, setForceUpdate] = useState(false); // ugly but necessary
 
   useEffect(() => {
     async function getTimeBlockSchedule() {
@@ -141,6 +142,17 @@ export default function DailyTimeBlock(props) {
       startIndex: startTimeBlockIndex,
       endIndex: endTimeBlockIndex,
     });
+    try {
+      postTimeBlock({
+        name: eventName + " : " + startTimeBlock.startTime + " - " + endTimeBlock.endTime,
+        startTime: startTimeBlock.startTime,
+        length: endTimeBlockIndex - startTimeBlockIndex + 1,
+        dayID: props.day.id
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+
     clearBlockSelections();
   }
 

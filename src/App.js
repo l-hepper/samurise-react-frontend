@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { useState, useEffect } from "react";
-import { getDayById } from "./http";
+import { getDayById, getDayByDate, getToday } from "./http";
 
 import Navbar from "./components/navbar";
 import DailyTimeBlock from "./components/daily-timeblock";
@@ -36,6 +36,8 @@ export default function App() {
   const [taskList, setTaskList] = useState();
   const [taskListColor, setTaskListColor] = useState();
 
+  const [startNewDay, setStartNewDay] = useState(false);
+
   const [isFetching, setIsFetching] = useState();
   const [fetchedDay, setFetchedDay] = useState([]);
   const [error, setError] = useState();
@@ -45,7 +47,7 @@ export default function App() {
       setIsFetching(true);
 
       try {
-        const day = await getDayById(1);
+        const day = await getToday();
         setFetchedDay(day);
       } catch (error) {
         setError(error);
@@ -126,6 +128,7 @@ export default function App() {
         <div class="left-page">
           <DailyTimeBlock
             day={fetchedDay}
+            dayId={fetchedDay.id}
             incrementDay={incrementDay}
             decrementDay={decrementDay}
             taskListArray={taskListArray}
