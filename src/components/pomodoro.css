@@ -3,9 +3,10 @@
 }
 
 .pomodoro-timer {
-  margin-top: 0.5%;
+  margin-top: 6%;
   border-radius: 5px;
   padding: 1rem;
+  border: 1px white solid;
 }
 
 .pomodoro-section-label {
@@ -42,8 +43,10 @@
 }
 
 .timer {
+  margin-top: 0.5rem;
   padding: 0.5rem;
   display: flex;
+  justify-content: center;
 }
 
 .begin-button {
@@ -64,4 +67,29 @@
 .daily-stats {
   margin-left: auto;
   color: var(--font-color);
+}
+
+.goal-tracker {
+  padding: 1rem;
+  margin-top: 0.5rem;
+  color: var(--font-color);
+}
+
+.goal-item {
+  margin-bottom: 0.5rem;
+}
+
+.daily-goal {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.banked-today-figure {
+  color: green;
+  font-weight: bold;
+}
+
+.banked-yesterday-figure {
+  color: red;
+  font-weight: bold;
 }

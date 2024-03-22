@@ -99,3 +99,19 @@ export async function markTaskAsNotComplete(id) {
   const responseData = await response.json();
 
 }
+
+export async function updateTimeBlockColor(timeBlockEventInformation) {
+  const response = await fetch("http://localhost:8080/update-timeblock-color", {
+    method: "POST",
+    body: JSON.stringify({ ...timeBlockEventInformation }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+
+  const responseData = await response.json();
+
+  if (!responseData.ok) {
+    throw Error("Updating time block color has failed");
+  }
+}

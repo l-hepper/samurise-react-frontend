@@ -6,7 +6,7 @@ import "./daily-timeblock.css";
 import DailyTimeBlockPeriod15 from "./daily-timeblock-period-15";
 import DateSelect from "./date-select";
 
-import { postTimeBlock } from "../http";
+import { postTimeBlock, updateTimeBlockColor } from "../http";
 
 // global values set outside of function to ensure they persist beyond state update
 let startTimeBlock = null;
@@ -147,7 +147,7 @@ export default function DailyTimeBlock(props) {
         name: eventName + " : " + startTimeBlock.startTime + " - " + endTimeBlock.endTime,
         startTime: startTimeBlock.startTime,
         length: endTimeBlockIndex - startTimeBlockIndex + 1,
-        dayID: props.day.id
+        dayID: props.day.id,
       });
     } catch (error) {
       console.log(error.message);
@@ -159,10 +159,24 @@ export default function DailyTimeBlock(props) {
   function handleChangeColor(color, index) {
     let modifiedTimeBlockArray = [...timeBlockArray];
     let name = modifiedTimeBlockArray[index].name;
+    let originalIndex = index;
+
+    
+    let length = 0;
     while (modifiedTimeBlockArray[index].name === name) {
       modifiedTimeBlockArray[index].color = color;
       index++;
+      length++;
     }
+
+    updateTimeBlockColor({
+      name: name,
+      startTime: modifiedTimeBlockArray[originalIndex].startTime,
+      length: length,
+      dayID: props.day.id,
+      color: color
+    })
+    
     setTimeBlockArray(modifiedTimeBlockArray);
   }
 

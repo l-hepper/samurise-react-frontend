@@ -85,10 +85,15 @@ export default function Pomodoro() {
         <button class="begin-button" onClick={beginCountDown}>
           {countingDown ? "Stop" : "Begin"}
         </button>
-        <div class="daily-stats">
+        {/* <div class="daily-stats">
           <p>Total Productive Minutes: 125</p>
           <p></p>
-        </div>
+        </div> */}
+      </div>
+      <div class="goal-tracker">
+        <p class="goal-item daily-goal">Daily Productive Goal: <span class="daily-goal-figure">180</span></p>
+        <p class="goal-item banked-today">Minutes Banked Today: <span class="banked-today-figure">205</span></p>
+        <p class="goal-item banked-yesterday">Minutes Banked Yesterday: <span class="banked-yesterday-figure">75</span></p>
       </div>
     </div>
   );
