@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 
 import "./tasklist.css";
 
-import { postTaskItem } from "../http";
+import { postTaskItem, markTaskAsComplete, markTaskAsNotComplete } from "../http";
 
 export default function TaskList({ taskList, setTaskList, taskListColor }) {
   const [addNewTaskMode, setAddNewTaskMode] = useState(false);
@@ -57,8 +57,11 @@ export default function TaskList({ taskList, setTaskList, taskListColor }) {
       ...modifiedTaskItem,
       complete: !modifiedTaskItem.complete,
     };
+
+
     modifiedTaskList.taskListItems[index] = modifiedTaskItem;
     setTaskList(modifiedTaskList);
+    markTaskAsComplete(modifiedTaskItem.id);
   }
 
   function removeTaskItem(index) {

@@ -71,3 +71,31 @@ export async function postTaskItem(task) {
 
   const responseData = response.json();
 }
+
+
+export async function markTaskAsComplete(id) {
+  const response = await fetch("http://localhost:8080/complete-task-item/" + id, {
+    method: "PUT"
+  });
+
+  if (!response.ok) {
+    throw Error("Unable to mark this task as complete");
+  }
+
+  const responseData = await response.json();
+
+}
+
+
+export async function markTaskAsNotComplete(id) {
+  const response = await fetch("http://localhost:8080/uncomplete-task-item/" + id, {
+    method: "PUT"
+  });
+
+  if (!response.ok) {
+    throw Error("Unable to mark this task as not complete");
+  }
+
+  const responseData = await response.json();
+
+}
