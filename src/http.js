@@ -59,3 +59,15 @@ export async function postTimeBlock(timeBlockEventInformation) {
     throw Error("Creating time block event failed.");
   }
 }
+
+export async function postTaskItem(task) {
+  const response = await fetch("http://localhost:8080/create-task-item", {
+    method: "POST",
+    body: JSON.stringify(task),
+    headers: {
+      "Content-Type": "application/json",
+    }
+  });
+
+  const responseData = response.json();
+}

@@ -99,8 +99,8 @@ export default function App() {
       setTaskListColor("gray");
       return;
     }
-    getTaskList(timeBlockName);
     setTaskListColor(timeBlockColor);
+    getTaskList(timeBlockName);
     // const taskListObject = taskListArray.find(
     //   (item) => item.taskListName === timeBlockName
     // );
@@ -108,9 +108,9 @@ export default function App() {
     // setTaskList(taskListObject);
   }
 
-  async function getTaskList(timeBlockName) {
+  async function getTaskList(name) {
     const response = await fetch(
-      "http://localhost:8080/get-task-list/" + timeBlockName
+      "http://localhost:8080/get-task-list/" + name
     );
     let responseData = await response.json();
     if (response.ok) {
@@ -119,8 +119,10 @@ export default function App() {
   }
 
   function createNewTaskListForBlock(timeBlockName) {
-    taskListArray.push({ taskListName: timeBlockName, taskListItems: [] });
-    switchTaskListView(timeBlockName);
+    // taskListArray.push({ taskListName: timeBlockName, taskListItems: [] });
+    
+
+
   }
 
   function deleteTaskList(timeBlockName) {

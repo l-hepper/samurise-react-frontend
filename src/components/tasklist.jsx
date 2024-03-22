@@ -3,9 +3,9 @@ import { useState, useRef, useEffect } from "react";
 
 import "./tasklist.css";
 
+import { postTaskItem } from "../http";
 
-
-export default function TaskList({taskList, setTaskList, taskListColor}) {
+export default function TaskList({ taskList, setTaskList, taskListColor }) {
   const [addNewTaskMode, setAddNewTaskMode] = useState(false);
   const inputRef = useRef(null);
 
@@ -39,9 +39,9 @@ export default function TaskList({taskList, setTaskList, taskListColor}) {
         return;
       }
       const newTaskName = event.target.value;
-      const newTask = { name: newTaskName, complete: false };
-
-      const modifiedTaskList = {...taskList};
+      const newTask = { name: newTaskName, complete: false, taskListId: taskList.id };
+      postTaskItem(newTask);
+      const modifiedTaskList = { ...taskList };
       modifiedTaskList.taskListItems.push(newTask);
 
       setTaskList(modifiedTaskList);
@@ -51,7 +51,7 @@ export default function TaskList({taskList, setTaskList, taskListColor}) {
 
   // uses the index of a task item to get from task array and flip its complete flag
   function markTaskItemAsCompleteOrNotComplete(index) {
-    const modifiedTaskList = {...taskList};
+    const modifiedTaskList = { ...taskList };
     let modifiedTaskItem = modifiedTaskList.taskListItems[index];
     modifiedTaskItem = {
       ...modifiedTaskItem,
@@ -62,7 +62,7 @@ export default function TaskList({taskList, setTaskList, taskListColor}) {
   }
 
   function removeTaskItem(index) {
-    const modifiedTaskList = {...taskList};
+    const modifiedTaskList = { ...taskList };
     modifiedTaskList.taskListItems.splice(index, 1);
     setTaskList(modifiedTaskList);
   }
@@ -83,26 +83,41 @@ export default function TaskList({taskList, setTaskList, taskListColor}) {
       <div class="task-content">
         <p class="timeblock-name">{taskList ? taskList.taskListName : null}</p>
         <ul>
-          {taskList ? (taskList.taskListItems.map((item, index) => (
-            <li
-              key={item.name}
-              onClick={() => markTaskItemAsCompleteOrNotComplete(index)}
-              onDoubleClick={() => removeTaskItem(index)}
-              className={"tasklist-item" + (item.complete ? " complete" : "")}
-            >
-              <span>{item.name}</span>
-            </li>
-          ))) : null}
-          {taskList ? addNewTaskMode ? (
-            <li>{input}</li>
-          ) : (
-            <button className="add-taskitem-button"
-              onClick={() =>
-                setAddNewTaskMode((previousState) => (previousState = true))
-              }
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" height="15" viewBox="0 -960 960 960" width="15"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg><span> Add</span>
-            </button>
+          {taskList
+            ? taskList.taskListItems.map((item, index) => (
+                <li
+                  key={item.name}
+                  onClick={() => markTaskItemAsCompleteOrNotComplete(index)}
+                  onDoubleClick={() => removeTaskItem(index)}
+                  className={
+                    "tasklist-item" + (item.complete ? " complete" : "")
+                  }
+                >
+                  <span>{item.name}</span>
+                </li>
+              ))
+            : null}
+          {taskList ? (
+            addNewTaskMode ? (
+              <li>{input}</li>
+            ) : (
+              <button
+                className="add-taskitem-button"
+                onClick={() =>
+                  setAddNewTaskMode((previousState) => (previousState = true))
+                }
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="15"
+                  viewBox="0 -960 960 960"
+                  width="15"
+                >
+                  <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+                </svg>
+                <span> Add</span>
+              </button>
+            )
           ) : null}
         </ul>
       </div>
